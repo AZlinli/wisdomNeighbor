@@ -1,0 +1,6 @@
+framework module Pods_wisdomNeighborUITests {
+  umbrella header "Pods-wisdomNeighborUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

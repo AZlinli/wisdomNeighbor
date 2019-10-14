@@ -1,0 +1,7 @@
+${PODS_ROOT}/Target Support Files/Pods-wisdomNeighbor/Pods-wisdomNeighbor-resources.sh
+${PODS_ROOT}/BaiduMapKit/BaiduMapKit/BaiduMapAPI_Map.framework/mapapi.bundle
+${PODS_ROOT}/RongCloudIM/RongCloudIM/RongCloud.bundle
+${PODS_ROOT}/RongCloudIM/RongCloudIM/en.lproj
+${PODS_ROOT}/RongCloudIM/RongCloudIM/zh-Hans.lproj
+${PODS_ROOT}/RongCloudIM/RongCloudIM/Emoji.plist
+${PODS_ROOT}/RongCloudIM/RongCloudIM/RCConfig.plist

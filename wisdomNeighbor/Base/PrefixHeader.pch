@@ -1,0 +1,57 @@
+//
+//  PrefixHeader.pch
+//  wisdomNeighbor
+//
+//  Created by Lin Li on 2019/9/11.
+//  Copyright © 2019 Lin Li. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#import "XKCommonDefine.h"
+#import <IQKeyboardManager/IQKeyboardManager.h>
+#import "XKEmptyPlaceView.h"
+#import <YYModel.h>
+#import <Masonry/Masonry.h>
+#import "ProjectEnum.h"
+#import <MJRefresh/MJRefresh.h>
+#import "BaseViewController.h"
+#import "UIView+XKCornerRadius.h"
+#import "NSObject+XKGlobeMethod.h"
+#import "UIView+Frame.h"
+#import "XKQRCodeView.h"
+#import "XKAuthorityTool.h"
+#import "UIFont+XKFont.h"
+#import "UIButton+XKButton.h"
+#import <RZColorful/RZColorful.h>
+#import "BaseViewFactory.h"
+#import "UIImageView+WebCache.h"
+#import <RongIMKit/RongIMKit.h>
+#import "IMListViewController.h"
+#import "HTTPClient.h"
+#import "CountdownManager.h"
+#import "XKHudView.h"
+#import "XKUserInfo.h"
+#import "NSString+XKString.h"
+#import "UIView+Border.h"
+#import "UIView+BlocksKit.h"
+#import "NSObject+XKController.h"
+#import "NSString+Utils.h"
+#import "YYText.h"
+#import "UILabel+xkEmoji.h"
+#import "XKTimeSeparateHelper.h"
+#import "XKPhotoPickHelper.h"
+#import "XKBottomAlertSheetView.h"
+#import "LoginModel.h"
+#import "GlobleCommonTool.h"
+#import "QCloudManager.h"
+#import "QBPopupMenu.h"
+#import "IMConversationViewController.h"
+#import <FMDB.h>
+#import "IMUserDBManager.h"
+#import "PersonalDataViewController.h"
+#import "XKAlertView.h"
+#import "XKLoginConfig.h"
+
+#endif /* PrefixHeader_pch */

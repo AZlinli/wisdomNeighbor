@@ -1,0 +1,6 @@
+framework module RZColorful {
+  umbrella header "RZColorful-umbrella.h"
+
+  export *
+  module * { export * }
+}
