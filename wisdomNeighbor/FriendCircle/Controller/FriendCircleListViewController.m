@@ -14,21 +14,34 @@
 
 @interface FriendCircleListViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView    *tableView;
-@property (nonatomic, strong) NSArray *dataArray;
+@property (nonatomic, strong) NSMutableArray *dataArray;
+@property (nonatomic, strong) NSArray *sectionArray;
+
 /**<##>*/
 @property(nonatomic, strong) UIImageView *tableHeaderBgView;
+/**是否是当前用户*/
+@property(nonatomic, assign) BOOL isMine;
 @end
 
 @implementation FriendCircleListViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self judgeCurrentUser];
     [self setNavTitle:@"" WithColor:[UIColor blackColor]];
     [self hideNavigationSeperateLine];
     self.navigationView.backgroundColor = HEX_RGBA(0x4A90FA, 0);
     [self initViews];
     [self loadData];
 }
+- (void)judgeCurrentUser {
+    if ([[LoginModel currentUser].data.users.userId isEqualToString:self.userId]) {
+        self.isMine = YES;
+    }else{
+        self.isMine = NO;
+    }
+}
+
 - (void)initViews {
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -46,7 +59,7 @@
     parameters[@"userId"] = self.userId;
     [HTTPClient postRequestWithURLString:@"project_war_exploded/friendsCircleServlet" timeoutInterval:20.0 parameters:parameters success:^(id responseObject) {
         NSArray *array = [NSArray yy_modelArrayWithClass:[FriendTalkModel class] json:responseObject[@"data"]];
-        self.dataArray = array;
+        [self.dataArray addObjectsFromArray:array];
         self.tableView.tableHeaderView = [self creatHeaderView];
         [self.tableView reloadData];
     } failure:^(XKHttpErrror *error) {
@@ -54,11 +67,29 @@
     }];
 }
 
-- (NSArray *)dataArray {
+- (NSMutableArray *)dataArray {
     if (!_dataArray) {
-        _dataArray = [NSArray array];
+        if (self.isMine) {
+            FriendTalkModel *model = [FriendTalkModel new];
+            _dataArray = @[model].mutableCopy;
+
+        }else{
+            _dataArray = [NSMutableArray array];
+        }
     }
     return _dataArray;
+}
+
+- (NSArray *)sectionArray {
+    if (!_sectionArray) {
+        if (self.isMine) {
+            _sectionArray = @[@"",@"2019年"];
+            
+        }else{
+            _sectionArray = @[@"2019年"];
+        }
+    }
+    return _sectionArray;
 }
 
 - (UITableView *)tableView {
@@ -105,7 +136,11 @@
     [headerImageView sd_setImageWithURL:[NSURL URLWithString:self.headerIcon] placeholderImage:[UIImage imageNamed:@"xk_ic_defult_head"]];
     headerImageView.layer.masksToBounds = YES;
     headerImageView.layer.cornerRadius = 5;
+    headerImageView.userInteractionEnabled = YES;
     [headerView addSubview:headerImageView];
+    [headerImageView bk_whenTapped:^{
+        [GlobleCommonTool jumpCircleListWithUserId:self.userId name:self.name headerIcon:self.headerIcon];
+    }];
     [headerImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(-15);
         make.width.height.mas_equalTo(60);
@@ -132,17 +167,39 @@
 #pragma mark - UITableViewDataSource
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     FriendTalkModel *model = self.dataArray[indexPath.section];
-
-    NSArray * imageArray = [model.images componentsSeparatedByString:@"|"];
-    if (imageArray.count <= 0) {
-        FriendCircleListShareTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell2" forIndexPath:indexPath];
-        cell.model = model;
-        return cell;
+    if (self.isMine) {
+        if (indexPath.section == 0) {
+            FriendCircleListImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+            cell.isMinePpecial = 1;
+            cell.model = model;
+            return cell;
+        }else{
+            NSArray * imageArray = [model.images componentsSeparatedByString:@"|"];
+            if (imageArray.count <= 0) {
+                FriendCircleListShareTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell2" forIndexPath:indexPath];
+                cell.model = model;
+                return cell;
+            }else{
+                FriendCircleListImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+                cell.isMinePpecial = 0;
+                cell.model = model;
+                return cell;
+            }
+        }
     }else{
-        FriendCircleListImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-        cell.model = model;
-        return cell;
+        NSArray * imageArray = [model.images componentsSeparatedByString:@"|"];
+        if (imageArray.count <= 0) {
+            FriendCircleListShareTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell2" forIndexPath:indexPath];
+            cell.model = model;
+            return cell;
+        }else{
+            FriendCircleListImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+            cell.model = model;
+            cell.isMinePpecial = 0;
+            return cell;
+        }
     }
+   
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.dataArray.count;
@@ -159,16 +216,38 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    FriendTalkModel *model = self.dataArray[indexPath.section];
-    FriendCircleDetailViewController *vc = [FriendCircleDetailViewController new];
-    vc.circleId = model.ID;
-    [self.navigationController pushViewController:vc animated:YES];
+    if (self.isMine) {
+        if (indexPath.section == 0) {
+            
+        }else{
+            FriendTalkModel *model = self.dataArray[indexPath.section];
+            FriendCircleDetailViewController *vc = [FriendCircleDetailViewController new];
+            vc.circleId = model.ID;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    }else{
+        FriendTalkModel *model = self.dataArray[indexPath.section];
+        FriendCircleDetailViewController *vc = [FriendCircleDetailViewController new];
+        vc.circleId = model.ID;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+   
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section == 0) {
-        return 30;
+  
+    if (self.isMine) {
+        if (section == 0) {
+            return 10;
+        }else if (section == 1){
+            return 30;
+        }
+    }else{
+        if (section == 0) {
+            return 30;
+        }
     }
+
     return CGFLOAT_MIN;
 }
 
@@ -180,7 +259,7 @@
     UIView *sectionHeaderView =  [[UIView alloc]init];
     sectionHeaderView.backgroundColor = HEX_RGB(0xffffff);
     UILabel *titleLabel = [UILabel new];
-    titleLabel.text = @"2019年";
+    titleLabel.text = self.sectionArray[section];
     titleLabel.font = XKMediumFont(29);
     titleLabel.textColor = HEX_RGB(0x000000);
     [sectionHeaderView addSubview:titleLabel];

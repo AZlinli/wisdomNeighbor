@@ -7,6 +7,7 @@
 //
 
 #import "FriendCircleListImageTableViewCell.h"
+#import "FriendCirclePublishController.h"
 
 @interface FriendCircleListImageTableViewCell()
 @property (nonatomic, strong)UILabel *titleLabel;
@@ -20,88 +21,101 @@
 
 - (void)setModel:(FriendTalkModel *)model {
     _model = model;
-    self.titleLabel.text = model.content;
-    self.addessLabel.text = model.locationaddress;
-    NSString *day = [self getCurrentDayTimeString:model.createtime];
-    NSString *month = [self getCurrentMonthTimeString:model.createtime];
-    NSString *monthStr = [NSString stringWithFormat:@"%@月",month];
-    [self.timeLabel rz_colorfulConfer:^(RZColorfulConferrer * _Nonnull confer) {
-        confer.text(day).font(XKMediumFont(23)).textColor(HEX_RGB(0x000000));
-        confer.text(monthStr).font(XKRegularFont(14)).textColor(HEX_RGB(0x000000));
-    }];
-    NSArray * imageArray = [model.images componentsSeparatedByString:@"|"];
-    NSMutableArray *picArray = [NSMutableArray array];
-    [imageArray enumerateObjectsUsingBlock:^(NSString *urlStr, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([urlStr containsString:@".mp4"]) {
-        }else{
-            [picArray addObject:urlStr];
-        }
-    }];
-
-    if (model.images) {
-        if (picArray.count == 1) {
-            [self.listImageView sd_setImageWithURL:picArray[0] placeholderImage:kDefaultPlaceHolderImg];
-        }else if (picArray.count == 2){
-            [self downLoadImageWithPicArray:picArray block:^(NSArray *picArray) {
-                //合并
-                UIGraphicsBeginImageContextWithOptions(CGSizeMake(450, 450), NO, 0.0);
-                for (int i = 0; i < picArray.count; i ++) {
-                    UIImage *image = picArray[i];
-                    [image drawInRect:CGRectMake(i * 225, 0, 225, 450)];
-                }
-                //给ImageView赋值
-                self.listImageView.image = UIGraphicsGetImageFromCurrentImageContext();
-                //关闭上下文
-                UIGraphicsEndImageContext();
-            }];
-        }else if (picArray.count == 3){
-            [self downLoadImageWithPicArray:picArray block:^(NSArray *picArray) {
-                //合并
-                UIGraphicsBeginImageContextWithOptions(CGSizeMake(450, 450), NO, 0.0);
-                for (int i = 0; i < picArray.count; i ++) {
-                    UIImage *image = picArray[i];
-                    if (i == 0) {
-                        [image drawInRect:CGRectMake(0, 0, 225, 450)];
-                    }else{
-                        [image drawInRect:CGRectMake(225, 225*(i -1), 225, 225)];
-                    }
-                }
-                //给ImageView赋值
-                self.listImageView.image = UIGraphicsGetImageFromCurrentImageContext();
-                //关闭上下文
-                UIGraphicsEndImageContext();
-            }];
-        }else if (picArray.count >= 4){
-            [self downLoadImageWithPicArray:picArray block:^(NSArray *picArray) {
-                //合并
-                UIGraphicsBeginImageContextWithOptions(CGSizeMake(450, 450), NO, 0.0);
-                for (int i = 0; i < 4; i ++) {
-                    UIImage *image = picArray[i];
-                    if (i == 0) {
-                        [image drawInRect:CGRectMake(0, 0, 225, 225)];
-                        
-                    }else if ( i== 1){
-                        [image drawInRect:CGRectMake(225, 0, 225, 225)];
-                    }else if ( i== 2){
-                        [image drawInRect:CGRectMake(0, 225, 225, 225)];
-                    }else if ( i== 3){
-                        [image drawInRect:CGRectMake(225, 225, 225, 225)];
-                    }
-                }
-                //给ImageView赋值
-                self.listImageView.image = UIGraphicsGetImageFromCurrentImageContext();
-                //关闭上下文
-                UIGraphicsEndImageContext();
-            }];
-        }
-    }
-    if (picArray.count > 0) {
-        self.numLabel.text = [NSString stringWithFormat:@"%lu张",(unsigned long)picArray.count];
-        self.numLabel.hidden = NO;
+    if (self.isMinePpecial) {
+        [self.timeLabel rz_colorfulConfer:^(RZColorfulConferrer * _Nonnull confer) {
+        confer.text(@"今天").font(XKMediumFont(23)).textColor(HEX_RGB(0x000000));
+        }];
+        self.listImageView.image = [UIImage imageNamed:@"xk_btn_friendsCirclePermissions_add"];
+        self.listImageView.userInteractionEnabled = YES;
+        [self.listImageView bk_whenTapped:^{
+            FriendCirclePublishController *vc = [FriendCirclePublishController new];
+            [[self getCurrentUIVC].navigationController pushViewController:vc animated:YES];
+        }];
+        self.titleLabel.text = model.content;
+        self.addessLabel.text = model.locationaddress;
     }else{
-        self.numLabel.hidden = YES;
+        self.titleLabel.text = model.content;
+        self.addessLabel.text = model.locationaddress;
+        NSString *day = [self getCurrentDayTimeString:model.createtime];
+        NSString *month = [self getCurrentMonthTimeString:model.createtime];
+        NSString *monthStr = [NSString stringWithFormat:@"%@月",month];
+        [self.timeLabel rz_colorfulConfer:^(RZColorfulConferrer * _Nonnull confer) {
+            confer.text(day).font(XKMediumFont(23)).textColor(HEX_RGB(0x000000));
+            confer.text(monthStr).font(XKRegularFont(14)).textColor(HEX_RGB(0x000000));
+        }];
+        NSArray * imageArray = [model.images componentsSeparatedByString:@"|"];
+        NSMutableArray *picArray = [NSMutableArray array];
+        [imageArray enumerateObjectsUsingBlock:^(NSString *urlStr, NSUInteger idx, BOOL * _Nonnull stop) {
+            if ([urlStr containsString:@".mp4"]) {
+            }else{
+                [picArray addObject:urlStr];
+            }
+        }];
+        
+        if (model.images) {
+            if (picArray.count == 1) {
+                [self.listImageView sd_setImageWithURL:picArray[0] placeholderImage:kDefaultPlaceHolderImg];
+            }else if (picArray.count == 2){
+                [self downLoadImageWithPicArray:picArray block:^(NSArray *picArray) {
+                    //合并
+                    UIGraphicsBeginImageContextWithOptions(CGSizeMake(450, 450), NO, 0.0);
+                    for (int i = 0; i < picArray.count; i ++) {
+                        UIImage *image = picArray[i];
+                        [image drawInRect:CGRectMake(i * 225, 0, 225, 450)];
+                    }
+                    //给ImageView赋值
+                    self.listImageView.image = UIGraphicsGetImageFromCurrentImageContext();
+                    //关闭上下文
+                    UIGraphicsEndImageContext();
+                }];
+            }else if (picArray.count == 3){
+                [self downLoadImageWithPicArray:picArray block:^(NSArray *picArray) {
+                    //合并
+                    UIGraphicsBeginImageContextWithOptions(CGSizeMake(450, 450), NO, 0.0);
+                    for (int i = 0; i < picArray.count; i ++) {
+                        UIImage *image = picArray[i];
+                        if (i == 0) {
+                            [image drawInRect:CGRectMake(0, 0, 225, 450)];
+                        }else{
+                            [image drawInRect:CGRectMake(225, 225*(i -1), 225, 225)];
+                        }
+                    }
+                    //给ImageView赋值
+                    self.listImageView.image = UIGraphicsGetImageFromCurrentImageContext();
+                    //关闭上下文
+                    UIGraphicsEndImageContext();
+                }];
+            }else if (picArray.count >= 4){
+                [self downLoadImageWithPicArray:picArray block:^(NSArray *picArray) {
+                    //合并
+                    UIGraphicsBeginImageContextWithOptions(CGSizeMake(450, 450), NO, 0.0);
+                    for (int i = 0; i < 4; i ++) {
+                        UIImage *image = picArray[i];
+                        if (i == 0) {
+                            [image drawInRect:CGRectMake(0, 0, 225, 225)];
+                            
+                        }else if ( i== 1){
+                            [image drawInRect:CGRectMake(225, 0, 225, 225)];
+                        }else if ( i== 2){
+                            [image drawInRect:CGRectMake(0, 225, 225, 225)];
+                        }else if ( i== 3){
+                            [image drawInRect:CGRectMake(225, 225, 225, 225)];
+                        }
+                    }
+                    //给ImageView赋值
+                    self.listImageView.image = UIGraphicsGetImageFromCurrentImageContext();
+                    //关闭上下文
+                    UIGraphicsEndImageContext();
+                }];
+            }
+        }
+        if (picArray.count > 0) {
+            self.numLabel.text = [NSString stringWithFormat:@"%lu张",(unsigned long)picArray.count];
+            self.numLabel.hidden = NO;
+        }else{
+            self.numLabel.hidden = YES;
+        }
     }
-    
 }
 
 - (void)initViews {
