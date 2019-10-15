@@ -93,8 +93,8 @@
     }];
     _detailLabel.textAlignment = NSTextAlignmentRight;
     [_detailLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self);
-        make.left.equalTo(self.mas_left).offset(100);
+        make.centerY.equalTo(self.titleLabel);
+        make.left.equalTo(self.titleLabel.mas_right).offset(10);
         make.right.equalTo(self.arrowImgView.mas_left).offset(-4);
     }];
     

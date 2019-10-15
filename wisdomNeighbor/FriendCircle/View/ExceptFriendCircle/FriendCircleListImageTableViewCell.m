@@ -33,6 +33,7 @@
         }];
         self.titleLabel.text = model.content;
         self.addessLabel.text = model.locationaddress;
+        self.numLabel.hidden = YES;
     }else{
         self.titleLabel.text = model.content;
         self.addessLabel.text = model.locationaddress;
