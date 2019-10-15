@@ -14,7 +14,7 @@
 #import "XKLoginUserContractView.h"
 #import "XKJumpWebViewController.h"
 
-@interface LoginViewController ()
+@interface LoginViewController ()<UITextFieldDelegate>
 /**contentView*/
 @property(nonatomic, strong) UIView *contentView;
 /**姓名的图片*/
@@ -558,6 +558,8 @@
         }else{
             _phoneTextField.placeholder = @"设置昵称";
         }
+        _phoneTextField.returnKeyType = UIReturnKeyDone;
+        _phoneTextField.keyboardType = UIKeyboardTypePhonePad;
         _phoneTextField.font = XKRegularFont(14);
 
     }
@@ -569,6 +571,9 @@
         _codeTextField = [UITextField new];
         _codeTextField.textColor = HEX_RGB(0x999999);
         _codeTextField.placeholder = @"请输入验证码";
+        _codeTextField.delegate = self;
+        _codeTextField.returnKeyType = UIReturnKeyDone;
+        _codeTextField.keyboardType = UIKeyboardTypePhonePad;
         _codeTextField.font = XKRegularFont(14);
     }
     return _codeTextField;
@@ -671,5 +676,13 @@
     return _desLabel;
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    [textField resignFirstResponder];//取消第一响应者
+    return YES;
+}
 
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self.view endEditing:YES];
+}
 @end

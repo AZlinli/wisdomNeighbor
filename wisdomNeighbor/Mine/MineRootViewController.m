@@ -206,10 +206,12 @@
     return footerView;
 }
 - (void)loginOutAction:(UIButton *)sender {
-    [XKLoginConfig loginDropOutConfig];
-    LoginViewController *vc = [LoginViewController new];
-    vc.vcType = loginVCTyoeLogin;
-    [UIApplication sharedApplication].delegate.window.rootViewController = vc;
+    [XKAlertView showCommonAlertViewWithTitle:@"退出登录" rightText:@"确定" rightBlock:^{
+        [XKLoginConfig loginDropOutConfig];
+        LoginViewController *vc = [LoginViewController new];
+        vc.vcType = loginVCTyoeLogin;
+        [UIApplication sharedApplication].delegate.window.rootViewController = vc;
+    }];
 }
 
 - (UIView *)creatTabelViewHeaderView {

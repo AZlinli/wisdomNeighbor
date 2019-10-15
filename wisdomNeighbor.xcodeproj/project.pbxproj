@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		09AB23F7B7098B6B07600CF6 /* Pods_wisdomNeighbor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CCC2C660D11DE0EB2CB6E1B /* Pods_wisdomNeighbor.framework */; };
 		3B1CAFAE2337161B0079E033 /* FriendCircleListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B1CAFAD2337161B0079E033 /* FriendCircleListViewController.m */; };
 		3B1CAFB123374D3A0079E033 /* FriendCircleListBaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B1CAFB023374D3A0079E033 /* FriendCircleListBaseTableViewCell.m */; };
 		3B1CAFB4233751F10079E033 /* FriendCircleListImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B1CAFB3233751F10079E033 /* FriendCircleListImageTableViewCell.m */; };
@@ -816,7 +815,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				09AB23F7B7098B6B07600CF6 /* Pods_wisdomNeighbor.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2622,7 +2620,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = NZJ85M8UE7;
+				DEVELOPMENT_TEAM = RYF558N5RP;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = $SRCROOT/wisdomNeighbor/Base/PrefixHeader.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/wisdomNeighbor/resource/Info.plist";
@@ -2631,7 +2629,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.daianla.mall.wisdomNeighbor;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zhilin.wisdomNeighbor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2644,7 +2642,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = NZJ85M8UE7;
+				DEVELOPMENT_TEAM = RYF558N5RP;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = $SRCROOT/wisdomNeighbor/Base/PrefixHeader.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/wisdomNeighbor/resource/Info.plist";
@@ -2653,7 +2651,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.daianla.mall.wisdomNeighbor;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zhilin.wisdomNeighbor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
