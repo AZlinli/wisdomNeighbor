@@ -44,6 +44,7 @@
 		3B3385C7234050D900D04BF5 /* IMConversationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B3385C6234050D900D04BF5 /* IMConversationViewController.m */; };
 		3B3385CB23405CE000D04BF5 /* IMUserDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B3385CA23405CE000D04BF5 /* IMUserDBManager.m */; };
 		3B37CE72235568430058FEEA /* send_camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B37CE71235568430058FEEA /* send_camera.png */; };
+		3B37CE75235597C40058FEEA /* XKAttributedBottomAlertSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B37CE74235597C40058FEEA /* XKAttributedBottomAlertSheetView.m */; };
 		3B4088DB232937ED00002108 /* HTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4088D8232937ED00002108 /* HTTPClient.m */; };
 		3B4088DC232937ED00002108 /* XKHttpErrror.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4088D9232937ED00002108 /* XKHttpErrror.m */; };
 		3B4088E1232939E000002108 /* XKInfoProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4088E0232939E000002108 /* XKInfoProvider.m */; };
@@ -367,6 +368,8 @@
 		3B3385C923405CE000D04BF5 /* IMUserDBManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IMUserDBManager.h; sourceTree = "<group>"; };
 		3B3385CA23405CE000D04BF5 /* IMUserDBManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMUserDBManager.m; sourceTree = "<group>"; };
 		3B37CE71235568430058FEEA /* send_camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = send_camera.png; sourceTree = "<group>"; };
+		3B37CE73235597C30058FEEA /* XKAttributedBottomAlertSheetView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XKAttributedBottomAlertSheetView.h; sourceTree = "<group>"; };
+		3B37CE74235597C40058FEEA /* XKAttributedBottomAlertSheetView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XKAttributedBottomAlertSheetView.m; sourceTree = "<group>"; };
 		3B4088D7232937ED00002108 /* XKHttpErrror.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XKHttpErrror.h; sourceTree = "<group>"; };
 		3B4088D8232937ED00002108 /* HTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPClient.m; sourceTree = "<group>"; };
 		3B4088D9232937ED00002108 /* XKHttpErrror.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XKHttpErrror.m; sourceTree = "<group>"; };
@@ -1706,15 +1709,17 @@
 				3BB862CF2334B43A00564C88 /* XKPhotoPickHelper.h */,
 				3BB862D02334B43A00564C88 /* XKCommonSheetView.h */,
 				3BB862D12334B43A00564C88 /* XKBottomBtnsSheetView.m */,
+				3BB862D62334B43A00564C88 /* XKBottomBtnsSheetView.h */,
+				3BB862D82334B43A00564C88 /* XKBottomAlertSheetView.h */,
 				3BB862D22334B43A00564C88 /* XKBottomAlertSheetView.m */,
 				3BB862D32334B43A00564C88 /* XKPayAlertSheetView.m */,
 				3BB862D42334B43A00564C88 /* XKBottomAlertSheetCell.m */,
 				3BB862D52334B43A00564C88 /* XKPhotoPickHelper.m */,
-				3BB862D62334B43A00564C88 /* XKBottomBtnsSheetView.h */,
 				3BB862D72334B43A00564C88 /* XKCommonSheetView.m */,
-				3BB862D82334B43A00564C88 /* XKBottomAlertSheetView.h */,
 				3BB862D92334B43A00564C88 /* XKBottomAlertSheetCell.h */,
 				3BB862DA2334B43A00564C88 /* XKPayAlertSheetView.h */,
+				3B37CE73235597C30058FEEA /* XKAttributedBottomAlertSheetView.h */,
+				3B37CE74235597C40058FEEA /* XKAttributedBottomAlertSheetView.m */,
 			);
 			path = XKCommonSheetView;
 			sourceTree = "<group>";
@@ -2281,6 +2286,7 @@
 				3B435192233C5551004FFFA6 /* QBPopupMenuPagenatorView.m in Sources */,
 				3BB862FF2334CF3100564C88 /* XKFriendMenuView.m in Sources */,
 				3B4089A42329470E00002108 /* FriendCircleRootViewController.m in Sources */,
+				3B37CE75235597C40058FEEA /* XKAttributedBottomAlertSheetView.m in Sources */,
 				3B9139F7233B002400EB207A /* YYAnimatedImageView.m in Sources */,
 				3B40896D232941CB00002108 /* YYTextInput.m in Sources */,
 				3B84F908232A718B0070EA1D /* UIButton+XKButton.m in Sources */,

@@ -175,8 +175,35 @@
         }];
         [sheet show];
     }];
+//    216 123 140   222 222 183 78 138 188  106 106 106
+//    约（饭局、牌局、游戏、旅游或者看书学习….）
+//    卖（厨艺、宝贝、车位、房子也行）
+//    送（首饰啊、项链啊、月光宝盒啥的）
+//    其他（帮个忙、搭把手、吐吐槽、晒晒宠….）
     [_settingView bk_whenTapped:^{
-        XKBottomAlertSheetView *sheet = [[XKBottomAlertSheetView alloc] initWithBottomSheetViewWithDataSource:@[@"约(聚会、约局等)",@"卖(物品变卖等)",@"送(物品送人等)",@"取消"] firstTitleColor:nil choseBlock:^(NSInteger index, NSString *choseTitle){
+        NSAttributedString *str1 = [NSAttributedString rz_colorfulConfer:^(RZColorfulConferrer *confer) {
+            confer.text(@"约").textColor(RGB(216, 123, 140)).font(XKRegularFont(14));
+            confer.text(@"（饭局、牌局、游戏、旅游或者看书学习….）").textColor(RGB(106, 106, 106)).font(XKRegularFont(14));
+        }];
+        NSAttributedString *str2 = [NSAttributedString rz_colorfulConfer:^(RZColorfulConferrer *confer) {
+            confer.text(@"卖").textColor(RGB(222, 222, 183)).font(XKRegularFont(14));
+            confer.text(@"（厨艺、宝贝、车位、房子也行）").textColor(RGB(106, 106, 106)).font(XKRegularFont(14));
+
+        }];
+        NSAttributedString *str3 = [NSAttributedString rz_colorfulConfer:^(RZColorfulConferrer *confer) {
+            confer.text(@"送").textColor(RGB(78, 138, 188)).font(XKRegularFont(14));
+            confer.text(@"（首饰啊、项链啊、月光宝盒啥的）").textColor(RGB(106, 106, 106)).font(XKRegularFont(14));
+
+        }];
+        NSAttributedString *str4 = [NSAttributedString rz_colorfulConfer:^(RZColorfulConferrer *confer) {
+            confer.text(@"其他").textColor(RGB(216, 123, 140)).font(XKRegularFont(14));
+            confer.text(@"（帮个忙、搭把手、吐吐槽、晒晒宠….）").textColor(RGB(106, 106, 106)).font(XKRegularFont(14));
+
+        }];
+        NSAttributedString *str5 = [NSAttributedString rz_colorfulConfer:^(RZColorfulConferrer *confer) {
+            confer.text(@"取消").textColor(RGB(106, 106, 106)).font(XKRegularFont(14));
+        }];
+        XKAttributedBottomAlertSheetView *sheet = [[XKAttributedBottomAlertSheetView alloc] initWithBottomSheetViewWithDataSource:@[str1,str2,str3,str4,str5]choseBlock:^(NSInteger index, NSString *choseTitle){
             ws.settingView.detailLabel.text = choseTitle;
 
             switch (index) {
@@ -190,6 +217,10 @@
                     break;
                 case 2:{
                     self.viewModel.tag = @"送";
+                }
+                    break;
+                case 3:{
+                    self.viewModel.tag = @"其他";
                 }
                     break;
                     

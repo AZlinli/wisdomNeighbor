@@ -35,8 +35,8 @@
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"type"] = @"getNotice";
     parameters[@"phoneNumber"] = [LoginModel currentUser].data.users.phone;
-    parameters[@"estates"] = @"1";
-    parameters[@"lastId"] = @"1";
+    parameters[@"estates"] = [LoginModel currentUser].currentHouseId;
+    parameters[@"lastId"] = @"0";
     [HTTPClient postRequestWithURLString:@"project_war_exploded/noticeServlet" timeoutInterval:20.0 parameters:parameters success:^(id responseObject) {
         self.dataArray = [NSArray yy_modelArrayWithClass:[NoticeModelData class] json:responseObject[@"data"]];
         [self.tableView reloadData];

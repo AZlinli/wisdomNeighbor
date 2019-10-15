@@ -130,7 +130,7 @@ static NSString *const replyCellId = @"replyCellId";
     params[@"type"] = @"searchFriendsCircle";
     params[@"phoneNumber"] = [LoginModel currentUser].data.users.phone;
     params[@"searchContent"] = keyWord;
-    params[@"estates"] = @"1";
+    params[@"estates"] = [LoginModel currentUser].currentHouseId;
     [self requestWithParams:params block:^(NSString *error, id data) {
         if (error) {
             EXECUTE_BLOCK(complete,error,nil);
@@ -300,7 +300,7 @@ static NSString *const replyCellId = @"replyCellId";
         isLike = @"false";
     }
     parameters[@"isLike"] = isLike;
-    parameters[@"estates"] = @"1";
+    parameters[@"estates"] = [LoginModel currentUser].currentHouseId;
     parameters[@"type"] = @"likeOrDisLike";
     [XKHudView showLoadingTo:self.vc.view animated:YES];
     [HTTPClient postRequestWithURLString:@"project_war_exploded/friendsCircleServlet" timeoutInterval:10.0 parameters:parameters success:^(id responseObject) {

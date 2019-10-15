@@ -41,7 +41,12 @@
     self.navigationView.backgroundColor = HEX_RGBA(0x4A90FA, 0);
     [self createUI];
     [self hideNavigationSeperateLine];
-    [self setNavRightButton];
+    //如果是便捷卡就不能发布朋友圈
+    if ([[LoginModel currentUser].data.users.usertype isEqualToString:@"6"]) {
+        
+    }else{
+        [self setNavRightButton];
+    }
     [self setNavLeftButton];
     [self hiddenBackButton:YES];
     [self loadNewMessage];
@@ -117,7 +122,7 @@
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"type"] = @"getNewNotice";
     parameters[@"phoneNumber"] = [LoginModel currentUser].data.users.phone;
-    parameters[@"estates"] = @"1";
+    parameters[@"estates"] = [LoginModel currentUser].currentHouseId;
     [HTTPClient postRequestWithURLString:@"project_war_exploded/noticeServlet" timeoutInterval:20.0 parameters:parameters success:^(id responseObject) {
         NoticeModelData *model =  [NoticeModelData yy_modelWithJSON:responseObject[@"data"]];
         self.noticeModelData = model;

@@ -93,7 +93,7 @@
     parameters[@"type"] = @"getOnesFriendsCircle";
     parameters[@"phoneNumber"] = [LoginModel currentUser].data.users.phone;
     parameters[@"lastId"] = @"0";
-    parameters[@"estates"] = @"1";
+    parameters[@"estates"] = [LoginModel currentUser].currentHouseId;
     parameters[@"userId"] = self.userId;
     [HTTPClient postRequestWithURLString:@"project_war_exploded/friendsCircleServlet" timeoutInterval:20.0 parameters:parameters success:^(id responseObject) {
         NSArray *array = [NSArray yy_modelArrayWithClass:[FriendTalkModel class] json:responseObject[@"data"]];

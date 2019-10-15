@@ -81,7 +81,7 @@
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"type"] = @"getBanner";
     parameters[@"phoneNumber"] = [LoginModel currentUser].data.users.phone;
-    parameters[@"estates"] = @"1";
+    parameters[@"estates"] = [LoginModel currentUser].currentHouseId;
     [HTTPClient postRequestWithURLString:@"project_war_exploded/bannerServlet" timeoutInterval:20.0 parameters:parameters success:^(id responseObject) {
         BannerModel *model = [BannerModel yy_modelWithJSON:responseObject];
         NSArray *modelArray = model.data;

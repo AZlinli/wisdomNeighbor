@@ -53,5 +53,6 @@
 #import "PersonalDataViewController.h"
 #import "XKAlertView.h"
 #import "XKLoginConfig.h"
+#import "XKAttributedBottomAlertSheetView.h"
 
 #endif /* PrefixHeader_pch */
