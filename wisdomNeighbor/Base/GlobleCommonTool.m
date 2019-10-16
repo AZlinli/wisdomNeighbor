@@ -70,7 +70,12 @@
 + (void)configTimeHourWith:(UIImageView *)bgImageView {
     NSInteger currentHour = [[NSUserDefaults standardUserDefaults]integerForKey:@"currentHour"];
     NSString *imageName;
-    imageName = [NSString stringWithFormat:@"hour_%ld.jpg",currentHour];
+    if (6 < currentHour || currentHour < 18) {
+        imageName = @"hour_101.jpg";
+    }else{
+        imageName = @"hour_100.jpg";
+    }
+//    imageName = [NSString stringWithFormat:@"hour_%ld.jpg",currentHour];
     bgImageView.image = [UIImage imageNamed:imageName];
 }
 
