@@ -130,7 +130,7 @@
     // 资源
     params[@"phoneNumber"] = [LoginModel currentUser].data.users.phone;
     params[@"type"] = @"sendFriendsCircle";
-    dataParams[@"belongestates"] = @"1";
+    dataParams[@"belongestates"] = [LoginModel currentUser].currentHouseId;
     dataParams[@"id"] = @"0";
     dataParams[@"locationaddress"] = self.currentAddess?:@"";
     dataParams[@"tag"] = self.tag?:@"";

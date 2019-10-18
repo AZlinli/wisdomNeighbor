@@ -35,6 +35,7 @@
         self.addessLabel.text = model.locationaddress;
         self.numLabel.hidden = YES;
     }else{
+        self.listImageView.userInteractionEnabled = NO;
         self.titleLabel.text = model.content;
         self.addessLabel.text = model.locationaddress;
         NSString *day = [self getCurrentDayTimeString:model.createtime];
@@ -42,7 +43,7 @@
         NSString *monthStr = [NSString stringWithFormat:@"%@月",month];
         [self.timeLabel rz_colorfulConfer:^(RZColorfulConferrer * _Nonnull confer) {
             confer.text(day).font(XKMediumFont(23)).textColor(HEX_RGB(0x000000));
-            confer.text(monthStr).font(XKRegularFont(14)).textColor(HEX_RGB(0x000000));
+            confer.text(monthStr).font(XKRegularFont(12)).textColor(HEX_RGB(0x000000));
         }];
         NSArray * imageArray = [model.images componentsSeparatedByString:@"|"];
         NSMutableArray *picArray = [NSMutableArray array];
@@ -54,6 +55,16 @@
         }];
         
         if (model.images) {
+            if (picArray.count >= 1) {
+                [self.listImageView sd_setImageWithURL:picArray[0] placeholderImage:kDefaultPlaceHolderImg];
+            };
+            if (picArray.count > 0) {
+                self.numLabel.text = [NSString stringWithFormat:@"%lu张",(unsigned long)picArray.count];
+                self.numLabel.hidden = NO;
+            }else{
+                self.numLabel.hidden = YES;
+            }
+            return;
             if (picArray.count == 1) {
                 [self.listImageView sd_setImageWithURL:picArray[0] placeholderImage:kDefaultPlaceHolderImg];
             }else if (picArray.count == 2){
@@ -109,12 +120,6 @@
                     UIGraphicsEndImageContext();
                 }];
             }
-        }
-        if (picArray.count > 0) {
-            self.numLabel.text = [NSString stringWithFormat:@"%lu张",(unsigned long)picArray.count];
-            self.numLabel.hidden = NO;
-        }else{
-            self.numLabel.hidden = YES;
         }
     }
 }

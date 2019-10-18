@@ -16,6 +16,11 @@
 @property (nonatomic, strong) UITableView    *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) NSArray *sectionArray;
+@property(nonatomic, strong) XKEmptyPlaceView *emptyView;
+
+@property(nonatomic, copy) NSString *lastId;
+
+@property(nonatomic, assign) RefreshDataStatus refreshStatus;
 
 /**<##>*/
 @property(nonatomic, strong) UIImageView *tableHeaderBgView;
@@ -27,12 +32,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.lastId = @"0";
     [self judgeCurrentUser];
     [self setNavTitle:@"" WithColor:[UIColor blackColor]];
     [self hideNavigationSeperateLine];
     self.navigationView.backgroundColor = HEX_RGBA(0x4A90FA, 0);
     [self initViews];
-    [self loadData];
+    [self requestDataRefresh:YES NeedTip:NO];
 }
 - (void)judgeCurrentUser {
     if ([[LoginModel currentUser].data.users.userId isEqualToString:self.userId]) {
@@ -44,25 +50,96 @@
 
 - (void)initViews {
     [self.view addSubview:self.tableView];
+    __weak typeof(self) weakSelf = self;
+//    _tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+//        [weakSelf requestDataRefresh:YES NeedTip:NO];
+//        weakSelf.tableView.tableHeaderView = [self creatHeaderView];
+//    }];
+    MJRefreshBackNormalFooter *mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        [weakSelf requestDataRefresh:NO NeedTip:NO];
+    }];
+    _tableView.mj_footer.hidden = YES;
+    _tableView.mj_footer = mj_footer;
+    [mj_footer setTitle:@"已经到底了！" forState:MJRefreshStateNoMoreData];
+    
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view);
         make.top.equalTo(self.view.mas_top);
         make.bottom.equalTo(self.view);
     }];
+    XMEmptyViewConfig *config = [[XMEmptyViewConfig alloc] init];
+    config.verticalOffset = 100;
+    config.viewAllowTap = NO;
+    config.spaceHeight = 10;
+    _emptyView = [XKEmptyPlaceView configScrollView:self.tableView config:config];
 }
-- (void)loadData {
+- (void)requestDataRefresh:(BOOL)refresh NeedTip:(BOOL)needTip {
+    if (needTip) {
+        [XKHudView showLoadingTo:self.tableView animated:YES];
+    }
+    __weak typeof(self) weakSelf = self;
+    [self loadDataRefresh:refresh complete:^(id error, id data) {
+        [XKHudView hideHUDForView:self.tableView animated:YES];
+        [self resetMJHeaderFooter:self.refreshStatus tableView:self.tableView dataArray:self.dataArray];
+        self.tableView.tableHeaderView = [self creatHeaderView];
+        [self.tableView reloadData];
+        if (error) {
+            if (self.dataArray.count == 0) {
+                self.emptyView.config.allowScroll = NO;
+                self.emptyView.config.viewAllowTap = YES; // 整个背景是否可点击  否则只有按钮可以点击
+                [self.emptyView showWithImgName:kNetErrorPlaceImgName title:@"网络错误" des:@"点击屏幕重试" tapClick:^{
+                    [weakSelf requestDataRefresh:YES NeedTip:YES];
+                }];
+            } else {
+                [XKHudView showErrorMessage:error to:self.tableView animated:YES];
+            }
+        } else {
+            self.emptyView.config.allowScroll = YES;
+            if (self.dataArray.count == 0) {
+                self.emptyView.config.viewAllowTap = NO;
+                [self.emptyView showWithImgName:kEmptyPlaceImgName title:nil des:@"还没有任何动态哦" tapClick:nil];
+            } else {
+                [self.emptyView hide];
+            }
+        }
+    }];
+}
+
+- (void)loadDataRefresh:(BOOL)isRefresh complete:(void (^)(id error,id data))complete  {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    if (isRefresh) {
+        self.lastId = @"0";
+    }
     parameters[@"type"] = @"getOnesFriendsCircle";
     parameters[@"phoneNumber"] = [LoginModel currentUser].data.users.phone;
-    parameters[@"lastId"] = @"0";
+    parameters[@"lastId"] = self.lastId;
     parameters[@"estates"] = [LoginModel currentUser].currentHouseId;
     parameters[@"userId"] = self.userId;
     [HTTPClient postRequestWithURLString:@"project_war_exploded/friendsCircleServlet" timeoutInterval:20.0 parameters:parameters success:^(id responseObject) {
         NSArray *array = [NSArray yy_modelArrayWithClass:[FriendTalkModel class] json:responseObject[@"data"]];
+        FriendTalkModel *model1 = array.lastObject;
+        self.lastId = model1.ID;
+        if (isRefresh) {
+            [self.dataArray removeAllObjects];
+        }
+        NSString *currentLastId = @"0";
+        
+        FriendTalkModel *model2 = self.dataArray.lastObject;
+        if (model2) {
+            currentLastId = model2.ID;
+        }
+        
+        if (currentLastId < self.lastId) {
+            self.refreshStatus = Refresh_HasDataAndHasMoreData;
+        } else {
+            self.refreshStatus = Refresh_NoDataOrHasNoMoreData;
+            
+        }
         [self.dataArray addObjectsFromArray:array];
-        self.tableView.tableHeaderView = [self creatHeaderView];
-        [self.tableView reloadData];
+        EXECUTE_BLOCK(complete,nil,array);
     } failure:^(XKHttpErrror *error) {
+        self.refreshStatus = Refresh_NoNet;
+        EXECUTE_BLOCK(complete,error,nil);
         [XKHudView showErrorMessage:error.message];
     }];
 }
