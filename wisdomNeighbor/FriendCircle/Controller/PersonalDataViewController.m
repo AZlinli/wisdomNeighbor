@@ -57,7 +57,7 @@
 #pragma mark – action
 - (void)moreAction:(UIButton *)sender {
     XKWeakSelf(ws);
-    XKBottomAlertSheetView *sheet = [[XKBottomAlertSheetView alloc] initWithBottomSheetViewWithDataSource:@[@"设置备注名称",@"设为星标好友",@"设置朋友圈权限",@"取消"] firstTitleColor:nil choseBlock:^(NSInteger index, NSString *choseTitle){
+    XKBottomAlertSheetView *sheet = [[XKBottomAlertSheetView alloc] initWithBottomSheetViewWithDataSource:@[@"设置备注名称",@"设为星标好友",@"设置朋友圈权限",@"举报",@"取消"] firstTitleColor:nil choseBlock:^(NSInteger index, NSString *choseTitle){
         switch (index) {
             case 0:{
                 XKChangeNicknameViewController *vc = [XKChangeNicknameViewController new];
@@ -79,6 +79,47 @@
                 FriendCircleJurisdictionViewController *vc = [FriendCircleJurisdictionViewController new];
                 vc.userId = self.userId;
                 [self.navigationController pushViewController:vc animated:YES];
+            }
+                break;
+            case 3:{
+                [ws report];
+            }
+                break;
+            default:
+                break;
+        }
+    }];
+    [sheet show];
+}
+
+- (void)showLoading {
+    [XKHudView showLoadingTo:self.tableView animated:YES];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [XKHudView showSuccessMessage:@"举报成功！"];
+        [XKHudView hideHUDForView:self.tableView];
+    });
+}
+
+- (void)report {
+    XKWeakSelf(ws);
+    XKBottomAlertSheetView *sheet = [[XKBottomAlertSheetView alloc] initWithBottomSheetViewWithDataSource:@[@"含有裸露、色情和亵渎内容",@"含有政治敏感内容",@"低俗、广告内容",@"其他",@"取消"] firstTitleColor:nil choseBlock:^(NSInteger index, NSString *choseTitle){
+        switch (index) {
+            case 0:{
+                [ws showLoading];
+            }
+                break;
+            case 1:{
+                [ws showLoading];
+
+            }
+                break;
+            case 2:{
+                [ws showLoading];
+                
+            }
+                break;
+            case 3:{
+                [ws showLoading];
             }
                 break;
             default:
