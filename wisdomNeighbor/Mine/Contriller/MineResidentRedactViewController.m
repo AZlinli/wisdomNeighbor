@@ -33,20 +33,20 @@
 
 - (void)initData {
     //    @"姓名",@"性别",@"手机号码"
-    if ([self.model.sex isEqualToString:@"1"]) {
-        self.wDataDict[@"1"] = @"男";
-    }else if ([self.model.sex isEqualToString:@"2"]){
-        self.wDataDict[@"1"] = @"女";
-    }else {
-        self.wDataDict[@"1"] = @"未设置";
-    }
+//    if ([self.model.sex isEqualToString:@"1"]) {
+//        self.wDataDict[@"1"] = @"男";
+//    }else if ([self.model.sex isEqualToString:@"2"]){
+//        self.wDataDict[@"1"] = @"女";
+//    }else {
+//        self.wDataDict[@"1"] = @"未设置";
+//    }
     if ([self.model.usertype isEqualToString:@"2"]) {
-        self.wDataDict[@"3"] = @"畅享卡";
+        self.wDataDict[@"2"] = @"畅享卡";
     }else if ([self.model.usertype isEqualToString:@"6"]){
-        self.wDataDict[@"3"] = @"便捷卡";
+        self.wDataDict[@"2"] = @"便捷卡";
     }
     self.wDataDict[@"0"] = self.model.nickname;
-    self.wDataDict[@"2"] = self.model.phone;
+    self.wDataDict[@"1"] = self.model.phone;
 
 }
 
@@ -96,14 +96,14 @@
 
 - (NSArray *)dataArray {
     if (!_dataArray) {
-        _dataArray = @[@"姓名",@"性别",@"手机号码",@"身份类型"];
+        _dataArray = @[@"姓名",@"手机号码",@"身份类型"];
     }
     return _dataArray;
 }
 
 - (NSMutableDictionary *)wDataDict {
     if (!_wDataDict) {
-        _wDataDict = @{@"0":@"",@"1":@"",@"2":@"",@"3":@""}.mutableCopy;
+        _wDataDict = @{@"0":@"",@"1":@"",@"2":@""}.mutableCopy;
     }
     return _wDataDict;
 }
@@ -156,17 +156,25 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
     NSString *key = [NSString stringWithFormat:@"%ld",indexPath.row];
     NSString *title = self.dataArray[indexPath.row];
+   
     if ([title isEqualToString:@"姓名"]) {
-        [self changeItemWithTitle:@"姓名" Row:key];
+        if (self.vcType == MineResidentRedactVCTyoeAdd) {
+            [self changeItemWithTitle:@"姓名" Row:key];
+        }else if (self.vcType == MineResidentRedactVCTyoeChange){
+            
+        }
     }else if ([title isEqualToString:@"性别"]){
         [self cellForTheSexWithRow:key];
     }else if ([title isEqualToString:@"身份证号码"]){
         [self changeItemWithTitle:@"身份证号码" Row:key];
     }else if ([title isEqualToString:@"手机号码"]){
-        [self changeItemWithTitle:@"手机号码" Row:key];
+        if (self.vcType == MineResidentRedactVCTyoeAdd) {
+            [self changeItemWithTitle:@"手机号码" Row:key];
+        }else if (self.vcType == MineResidentRedactVCTyoeChange){
+            
+        }
     }else if ([title isEqualToString:@"身份类型"]){
         [self cellForIdentityTypeWithRow:key];
     }else if ([title isEqualToString:@"房间号"]){
@@ -178,7 +186,7 @@
 - (void)cellForIdentityTypeWithRow:(NSString *)row {
     XKWeakSelf(ws);
     NSArray *typeArray;
-    if ([[LoginModel currentUser].data.users.usertype isEqualToString:@"1"]) {
+    if ([[LoginModel currentUser].currentUserType isEqualToString:@"1"]) {
         typeArray = @[@"畅享卡",@"便捷卡",@"取消"];
     }else{
         typeArray = @[@"便捷卡",@"取消"];
@@ -308,47 +316,25 @@
 
 
 - (void)updateDataWithType:(MineResidentRedactVCTyoe)type {
-    // FIXME: lilin {"phoneNumber":"18380446466","data":"{\"belonghouse\":\"1\",\"friendsremindnum\":0,\"id\":0,\"nickname\":\"测a试\",\"nowuseestates\":0,\"phone\":\"12213121315\",\"sex\":1,\"status\":0,\"truename\":\"测12试\",\"usertype\":2}","type":"addUser"}
-//    {"phoneNumber":"18380446466","data":"{\"belonghouse\":\"1\",\"createtime\":\"2019-09-11 15:48:51\",\"friendsremindnum\":0,\"icon\":\"https://menjin-1251461298.cos.ap-chengdu.myqcloud.com/20190816/15659264796001031071159\",\"id\":35,\"nickname\":\"测试\",\"nowuseestates\":0,\"phone\":\"1221312315\",\"sex\":2,\"status\":1,\"truename\":\"测试\",\"usertype\":2}","type":"updateUser"}
-    //    @"姓名",@"性别",@"手机号码",@"身份类型"
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    NSMutableDictionary *dataParameters = [NSMutableDictionary dictionary];
-    parameters[@"phoneNumber"] = [LoginModel currentUser].data.users.phone;
-    parameters[@"data"] = dataParameters;
-    dataParameters[@"belonghouse"] = @"1";
-    dataParameters[@"friendsremindnum"] = @"0";
-    dataParameters[@"id"] = @"0";
-    dataParameters[@"nickname"] = self.wDataDict[@"0"];
-    dataParameters[@"nowuseestates"] = @"0";
-    dataParameters[@"phone"] = self.wDataDict[@"2"];
-    dataParameters[@"status"] = @"1";
-    dataParameters[@"truename"] = self.wDataDict[@"0"];
-    NSString *sexStr;
     NSString *userTypeStr;
 
-    if (self.wDataDict[@"1"]) {
-        if ([self.wDataDict[@"1"] isEqualToString:@"男"]) {
-            sexStr = @"1";
-        }else if ([self.wDataDict[@"1"] isEqualToString:@"女"]){
-            sexStr = @"2";
-        }
-    }
-    if (self.wDataDict[@"3"]) {
-        if ([self.wDataDict[@"3"] isEqualToString:@"畅享卡"]) {
+    if (self.wDataDict[@"2"]) {
+        if ([self.wDataDict[@"2"] isEqualToString:@"畅享卡"]) {
             userTypeStr = @"2";
-        }else if ([self.wDataDict[@"3"] isEqualToString:@"便捷卡"]){
+        }else if ([self.wDataDict[@"2"] isEqualToString:@"便捷卡"]){
             userTypeStr = @"6";
         }
     }
-    dataParameters[@"sex"] = sexStr;
-    dataParameters[@"usertype"] = userTypeStr;
-
+    parameters[@"userType"] = userTypeStr;
+    parameters[@"userHouse"] = [LoginModel currentUser].currentHouseId;
     if (type == MineResidentRedactVCTyoeAdd) {
+        parameters[@"userName"] = self.wDataDict[@"0"];
+        parameters[@"phone"] = self.wDataDict[@"1"];
         parameters[@"type"] = @"addUser";
     }else if (type == MineResidentRedactVCTyoeChange){
-        parameters[@"type"] = @"updateUser";
-        dataParameters[@"createtime"] = [XKTimeSeparateHelper backYMDHMStringByStrigulaSegmentWithDate:[NSDate date]];
-        dataParameters[@"icon"] = @"";
+        parameters[@"type"] = @"updateUserType";
+        parameters[@"userbelonghouse"] = self.model.userbelonghouse.ID;
     }
     
     [XKHudView showLoadingTo:self.tableView animated:YES];

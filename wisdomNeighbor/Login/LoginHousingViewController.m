@@ -25,11 +25,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     //地图
-    [[[XKMapManager getCurrentMapFactory] getMapLocation] setLocationDelegate:self];
-    [[[XKMapManager getCurrentMapFactory] getMapLocation] startBaiduSingleLocationService];
-    [self setNavTitle:@"选择小区" WithColor:HEX_RGB(0x222222)];
+//    [[[XKMapManager getCurrentMapFactory] getMapLocation] setLocationDelegate:self];
+//    [[[XKMapManager getCurrentMapFactory] getMapLocation] startBaiduSingleLocationService];
+    [self setNavTitle:@"选择房子" WithColor:HEX_RGB(0x222222)];
     // FIXME: lilin
-    [self loadDataWithlatitude:1.0 longtitude:2.0];
+//    [self loadDataWithlatitude:1.0 longtitude:2.0];
+    self.dataArray = [LoginModel currentUser].data.houses;
     [self hiddenBackButton:!self.showBack];
     [self initViews];
 }
@@ -44,7 +45,7 @@
 - (void)loadDataWithlatitude:(double)latitude longtitude:(double)longtitude {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"type"] = @"getEstatesVisitor";
-    parameters[@"phoneNumber"] = [LoginModel currentUser].data.users.phone;
+    parameters[@"userHouse"] = [LoginModel currentUser].currentHouseId;
     // FIXME: lilin
     parameters[@"latitude"] = @"1";
     parameters[@"longtitude"] = @"1";
@@ -86,7 +87,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    LoginHousingModelData *model = self.dataArray[indexPath.row];
+    LoginModelHouses *model = self.dataArray[indexPath.row];
         MinePersonalTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
 //    [cell.myContentView mas_updateConstraints:^(MASConstraintMaker *make) {
 //        make.left.mas_equalTo(15);
@@ -101,7 +102,8 @@
 //    }else{
 //        cell.myContentView.xk_clipType = XKCornerClipTypeNone;
 //    }
-    cell.titleLabel.text = model.name;
+    cell.titleLabel.text = model.estates.name;
+    cell.rightTitlelabel.text = model.estates.locationstring;
         return cell;
 }
 
@@ -114,9 +116,11 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    LoginHousingModelData *model = self.dataArray[indexPath.row];
-    [LoginModel currentUser].currentHouseId = model.ID;
-    [LoginModel currentUser].currentHouseName = model.name;
+    LoginModelHouses *model = self.dataArray[indexPath.row];
+    [LoginModel currentUser].currentHouseId = model.userbelonghouse.ID;
+    [LoginModel currentUser].currentHouseName = model.estates.name;
+    [LoginModel currentUser].currentUserType = model.userbelonghouse.usertype;
+
     XKUserSynchronize;
     BaseTabBarConfig *tabBarControllerConfig = [[BaseTabBarConfig alloc] init];
     CYLTabBarController *tabBarController = tabBarControllerConfig.tabBarController;

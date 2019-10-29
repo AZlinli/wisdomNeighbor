@@ -72,7 +72,7 @@
 - (NSArray *)dataArray {
     
     if (!_dataArray) {
-        if ([[LoginModel currentUser].data.users.usertype isEqualToString:@"1"] || [[LoginModel currentUser].data.users.usertype isEqualToString:@"2"]) {
+        if ([[LoginModel currentUser].currentUserType isEqualToString:@"1"] || [[LoginModel currentUser].currentUserType isEqualToString:@"2"]) {
              _dataArray = @[@[@"个人信息",@"私聊消息",@"住户管理",@"已屏蔽用户"], @[@"切换房子",@"检查更新",@"关于智邻"]];
         }else{
              _dataArray = @[@[@"个人信息",@"私聊消息",@"已屏蔽用户"], @[@"切换房子",@"检查更新",@"关于智邻"]];
@@ -239,11 +239,11 @@
     }];
     
     UILabel *userLabel = [UILabel new];
-    if ([[LoginModel currentUser].data.users.usertype isEqualToString:@"1"]) {
+    if ([[LoginModel currentUser].currentUserType isEqualToString:@"1"]) {
         userLabel.text = @"信息：业主";
-    }else if ([[LoginModel currentUser].data.users.usertype isEqualToString:@"2"]){
+    }else if ([[LoginModel currentUser].currentUserType isEqualToString:@"2"]){
         userLabel.text = @"信息：畅享卡";
-    }else if ([[LoginModel currentUser].data.users.usertype isEqualToString:@"6"]){
+    }else if ([[LoginModel currentUser].currentUserType isEqualToString:@"6"]){
         userLabel.text = @"信息：便捷卡";
     }
     userLabel.textColor = HEX_RGB(0x7F7F7F);

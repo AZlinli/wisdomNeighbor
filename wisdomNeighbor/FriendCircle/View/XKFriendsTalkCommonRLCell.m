@@ -105,7 +105,7 @@ static CGFloat xkFriendTalkContentMaxHeight = 0;
     _headerImageView.clipsToBounds = YES;
     _headerImageView.layer.cornerRadius = 4;
     [_headerImageView bk_whenTapped:^{
-        [GlobleCommonTool jumpToPersonalDataOrCircleListWithUserId:self.model.sendUser.userId name:self.model.sendUser.nickname headerIcon:self.model.sendUser.icon];
+        [GlobleCommonTool jumpToPersonalDataOrCircleListWithUserId:self.model.sendUser.userbelonghouse.ID name:self.model.sendUser.nickname headerIcon:self.model.sendUser.icon];
     }];
     [self.totoalView addSubview:_headerImageView];
     /**名字*/
@@ -114,7 +114,7 @@ static CGFloat xkFriendTalkContentMaxHeight = 0;
     _nameLabel.userInteractionEnabled = YES;
     _nameLabel.textColor = HEX_RGB(0x222222);
     [_nameLabel bk_whenTapped:^{
-        [GlobleCommonTool jumpToPersonalDataOrCircleListWithUserId:self.model.sendUser.userId name:self.model.sendUser.nickname headerIcon:self.model.sendUser.icon];
+        [GlobleCommonTool jumpToPersonalDataOrCircleListWithUserId:self.model.sendUser.userbelonghouse.ID name:self.model.sendUser.nickname headerIcon:self.model.sendUser.icon];
     }];
     [self.contentView addSubview:_nameLabel];
     
@@ -268,7 +268,6 @@ static CGFloat xkFriendTalkContentMaxHeight = 0;
     self.addessLabel.text = model.locationaddress?:@"";
     self.talkContentView.contentNeedFold = self.contentExistFold;
     self.talkContentView.model = model;
-    self.toolView.favorButton.selected = model.isLike;
     self.toolView.infoLabel.text = [XKTimeSeparateHelper customTimeStyleWithTimeString:self.model.createtime];
     
     [_headerImageView sd_setImageWithURL:kURL(model.sendUser.icon) placeholderImage:kDefaultHeadImg];
@@ -305,7 +304,7 @@ static CGFloat xkFriendTalkContentMaxHeight = 0;
     _toolView.giftButton.hidden = YES;
     
     
-    if ([model.uerid isEqualToString:[LoginModel currentUser].data.users.userId]) {
+    if ([model.sendUser.userbelonghouse.userid isEqualToString:[LoginModel currentUser].data.users.userId]) {
         self.toolView.deleteBtn.hidden = NO;
     } else {
         self.toolView.deleteBtn.hidden = YES;
@@ -377,7 +376,7 @@ static CGFloat xkFriendTalkContentMaxHeight = 0;
 
 #pragma mark - 回复点击
 - (void)replyClick {
-    EXECUTE_BLOCK(self.commentClickBlock,self.indexPath,nil,self.model.uerid);
+    EXECUTE_BLOCK(self.commentClickBlock,self.indexPath,nil,self.model.sendUser.userbelonghouse.ID);
 }
 
 #pragma mark - 点赞点击
@@ -462,8 +461,8 @@ static CGFloat xkFriendTalkContentMaxHeight = 0;
     UIFont *font = [UIFont systemFontOfSize:kCommentFontSize];
     NSMutableAttributedString *contentMstr = [[NSMutableAttributedString alloc]
                                               init];
-    
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ic_btn_msg_circle_noLike"]];
+    UIImageView *imageView = [[UIImageView alloc] init];
+    imageView.image = [UIImage imageNamed:@"ic_btn_msg_circle_noLike"];
     imageView.contentMode = UIViewContentModeScaleAspectFit;
     imageView.frame = CGRectMake(0, 0, 13, 13);
     NSMutableAttributedString *attachImageStr = [NSMutableAttributedString yy_attachmentStringWithContent:imageView contentMode:UIViewContentModeScaleAspectFit attachmentSize:imageView.size alignToFont:font alignment:YYTextVerticalAlignmentCenter];
@@ -484,7 +483,7 @@ static CGFloat xkFriendTalkContentMaxHeight = 0;
             }
         }].mutableCopy;
         [text yy_setTextHighlightRange:NSMakeRange(0, name.length) color:nil backgroundColor:[UIColor lightGrayColor] tapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
-            [GlobleCommonTool jumpToPersonalDataOrCircleListWithUserId:likesUser.userId name:name headerIcon:likesUser.icon];
+            [GlobleCommonTool jumpToPersonalDataOrCircleListWithUserId:likesUser.userbelonghouse.ID name:name headerIcon:likesUser.icon];
         }];
         [contentMstr appendAttributedString:text];
     }

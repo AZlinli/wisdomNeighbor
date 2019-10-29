@@ -163,7 +163,7 @@
             NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
             parameters[@"nickName"] = text;
             parameters[@"type"] = @"updateNickName";
-            parameters[@"phoneNumber"] = [LoginModel currentUser].data.users.phone;
+            parameters[@"userHouse"] = [LoginModel currentUser].currentHouseId;
             [ws upImageDataWithParameters:parameters];
             [ws.tableView reloadData];
         };
@@ -198,7 +198,7 @@
                     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
                     parameters[@"icon"] = url;
                     parameters[@"type"] = @"updateIcon";
-                    parameters[@"phoneNumber"] = [LoginModel currentUser].data.users.phone;
+                    parameters[@"userHouse"] = [LoginModel currentUser].currentHouseId;
                     [ws upImageDataWithParameters:parameters];
 
                 } failure:^(NSString * _Nonnull data) {

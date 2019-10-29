@@ -124,26 +124,20 @@
 - (void)innerRequestPublishComplete:(void(^)(NSString *error, id data))complete {
     NSString *url = @"project_war_exploded/friendsCircleServlet";
     NSMutableDictionary *params = @{}.mutableCopy;
-    NSMutableDictionary *dataParams = @{}.mutableCopy;
-
 //    {"phoneNumber":"18380446466","data":"{\"belongestates\":1,\"id\":0,\"images\":\"https://menjin-1251461298.cos.ap-chengdu.myqcloud.com/20190911/156818488697111831177|https://menjin-1251461298.cos.ap-chengdu.myqcloud.com/20190911/15681848869891160117115\",\"locationaddress\":\"中国四川省成都市武侯区一环路南2段-16号-附39号\",\"tag\":\"卖\",\"text\":\"发布的内容\",\"type\":1,\"uerid\":\"1\"}","type":"sendFriendsCircle"}
     // 资源
-    params[@"phoneNumber"] = [LoginModel currentUser].data.users.phone;
+    params[@"userHouse"] = [LoginModel currentUser].currentHouseId;
     params[@"type"] = @"sendFriendsCircle";
-    dataParams[@"belongestates"] = [LoginModel currentUser].currentHouseId;
-    dataParams[@"id"] = @"0";
-    dataParams[@"locationaddress"] = self.currentAddess?:@"";
-    dataParams[@"tag"] = self.tag?:@"";
-    dataParams[@"text"] = self.contentStr;
-    dataParams[@"type"] = @"1";
-    dataParams[@"uerid"] = [LoginModel currentUser].data.users.userId;
-
+    NSMutableDictionary *data = [NSMutableDictionary dictionary];
+    data[@"locationaddress"] = self.currentAddess?:@"";
+    data[@"tag"] = self.tag?:@"";
+    data[@"text"] = self.contentStr;
     if ([self getMediaArray].count != 0) { // 有视频或者图片
         NSArray *videoes = [self getVideoArray];
         if (videoes.count != 0) { // 代表是视频
             XKUploadMediaInfo *videoInfo = videoes.firstObject;
-            dataParams[@"images"] = videoInfo.videoNetAddr;
-            dataParams[@"contenttype"] = @"2";
+            data[@"images"] = videoInfo.videoNetAddr;
+            data[@"contenttype"] = @"2";
         } else {
             NSArray *pics = [self getPicArray];
             NSMutableString *picStr = [NSMutableString string];
@@ -154,16 +148,15 @@
                     [picStr appendFormat:@"|%@",picInfo.imageNetAddr];
                 }
             }];
-            dataParams[@"contenttype"] = @"1";
-            dataParams[@"images"] = picStr;
+            data[@"contenttype"] = @"1";
+            data[@"images"] = picStr;
 
         }
     }else{
-        dataParams[@"contentytype"] = @"0";
+        data[@"contenttype"] = @"0";
     }
     
-    params[@"data"] = dataParams;
-
+    params[@"data"] = data;
     [HTTPClient postRequestWithURLString:url timeoutInterval:20 parameters:params success:^(id responseObject) {
         EXECUTE_BLOCK(complete,nil,responseObject);
     } failure:^(XKHttpErrror *error) {

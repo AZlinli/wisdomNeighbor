@@ -224,8 +224,8 @@
     NSString *name2 = comment.beComments.nickname;
     NSString *word = comment.content;
     
-    NSString *userId = self.model.uerid;
-    NSString *beUserId = comment.beComments.ID;
+    NSString *userId = self.model.sendUser.userbelonghouse.ID;
+    NSString *beUserId = comment.beComments.userbelonghouse.ID;
     NSMutableAttributedString *text;
     if ([userId isEqualToString:beUserId]) {
        text  = [NSAttributedString rz_colorfulConfer:^(RZColorfulConferrer *confer) {

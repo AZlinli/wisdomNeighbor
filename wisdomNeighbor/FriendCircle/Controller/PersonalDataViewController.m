@@ -132,9 +132,8 @@
 - (void)loadData {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"type"] = @"getOnesFriendsCircle";
-    parameters[@"phoneNumber"] = [LoginModel currentUser].data.users.phone;
+    parameters[@"userHouse"] = [LoginModel currentUser].currentHouseId;
     parameters[@"lastId"] = @"0";
-    parameters[@"estates"] = [LoginModel currentUser].currentHouseId;
     parameters[@"userId"] = self.userId;
     [HTTPClient postRequestWithURLString:@"project_war_exploded/friendsCircleServlet" timeoutInterval:20.0 parameters:parameters success:^(id responseObject) {
         NSArray *array = [NSArray yy_modelArrayWithClass:[FriendTalkModel class] json:responseObject[@"data"]];
@@ -275,11 +274,11 @@
     if (!_contentLabel) {
         _contentLabel = [UILabel new];
         _contentLabel.textColor = HEX_RGB(0x969696);
-        if ([[LoginModel currentUser].data.users.usertype isEqualToString:@"1"]) {
+        if ([[LoginModel currentUser].currentUserType isEqualToString:@"1"]) {
             _contentLabel.text = @"信息：业主";
-        }else if ([[LoginModel currentUser].data.users.usertype isEqualToString:@"2"]){
+        }else if ([[LoginModel currentUser].currentUserType isEqualToString:@"2"]){
             _contentLabel.text = @"信息：畅享卡";
-        }else if ([[LoginModel currentUser].data.users.usertype isEqualToString:@"6"]){
+        }else if ([[LoginModel currentUser].currentUserType isEqualToString:@"6"]){
             _contentLabel.text = @"信息：便捷卡";
         }
         _contentLabel.font = XKRegularFont(14);

@@ -83,9 +83,8 @@ static NSString *const replyCellId = @"replyCellId";
     }
     
     params[@"type"] = @"getFriendsCircle";
-    params[@"phoneNumber"] = [LoginModel currentUser].data.users.phone;
     params[@"lastId"] = self.lastId;
-    params[@"estates"] = [LoginModel currentUser].currentHouseId;
+    params[@"userHouse"] = [LoginModel currentUser].currentHouseId;
 
     [self requestWithParams:params block:^(NSString *error, id data) {
         if (error) {
@@ -128,9 +127,8 @@ static NSString *const replyCellId = @"replyCellId";
 - (void)requestDetailWithFriendsKeyWord:(NSString *)keyWord complete:(void (^)(id error,id data))complete {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"type"] = @"searchFriendsCircle";
-    params[@"phoneNumber"] = [LoginModel currentUser].data.users.phone;
+    params[@"userHouse"] = [LoginModel currentUser].currentHouseId;
     params[@"searchContent"] = keyWord;
-    params[@"estates"] = [LoginModel currentUser].currentHouseId;
     [self requestWithParams:params block:^(NSString *error, id data) {
         if (error) {
             EXECUTE_BLOCK(complete,error,nil);
@@ -145,7 +143,7 @@ static NSString *const replyCellId = @"replyCellId";
 - (void)requestDetailWithFriendsCircleId:(NSString *)friendsCircleId complete:(void (^)(id error,id data))complete {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"type"] = @"getOneFriendsCircle";
-    params[@"phoneNumber"] = [LoginModel currentUser].data.users.phone;
+    params[@"userHouse"] = [LoginModel currentUser].currentHouseId;
     params[@"friendsCircleId"] = friendsCircleId;
     NSMutableArray *modelArray = [NSMutableArray array];
 
@@ -171,7 +169,7 @@ static NSString *const replyCellId = @"replyCellId";
                    ^{
                        FriendTalkModel *model = self.dataArray[indexPath.section];
                        NSMutableDictionary *params = [NSMutableDictionary dictionary];
-                       params[@"phoneNumber"] = [LoginModel currentUser].data.users.phone;
+                       params[@"userHouse"] = [LoginModel currentUser].currentHouseId;
                        params[@"type"] = @"getOneFriendsCircle";
                        params[@"friendsCircleId"] = model.ID;
                        [self requestSingleWithParams:params block:^(NSString *error, id data) {
@@ -224,11 +222,10 @@ static NSString *const replyCellId = @"replyCellId";
     if (self.commentInfo.isReply) {
         params[@"useridBecomment"] = self.commentInfo.replyId;
     } else {
-        params[@"useridBecomment"] = model.uerid;
+        params[@"useridBecomment"] = model.sendUser.userbelonghouse.ID;
     }
-    //    {"friendsCircleId":"44","useridBecomment":"1","phoneNumber":"18380446466","commentContent":"评论内容","type":"sendComment"}
     params[@"friendsCircleId"] = self.commentInfo.did;
-    params[@"phoneNumber"] = [LoginModel currentUser].data.users.phone;
+    params[@"userHouse"] = [LoginModel currentUser].currentHouseId;
     params[@"commentContent"] = self.commentInfo.content;
     params[@"type"] = @"sendComment";
 
@@ -268,13 +265,13 @@ static NSString *const replyCellId = @"replyCellId";
             self.commentInfo.content = nil;
             self.commentInfo.isReply = YES;
         }
-        if (![self.commentInfo.replyId isEqualToString:comment.userid]) { // 切换了回复人
+        if (![self.commentInfo.replyId isEqualToString:comment.comments.userbelonghouse.ID]) { // 切换了回复人
             self.commentInfo.content = nil;
         }
     }
     FriendTalkModel *model = self.dataArray[indexPath.section];
     self.commentInfo.indexPath = indexPath;
-    self.commentInfo.replyId = comment.userid;
+    self.commentInfo.replyId = comment.comments.userbelonghouse.ID;
     self.commentInfo.did = model.ID;
     [_replyView setAtUserName:comment.content];
     [_replyView setOriginText:self.commentInfo.content];
@@ -286,7 +283,7 @@ static NSString *const replyCellId = @"replyCellId";
     FriendTalkModel *model = self.dataArray[indexPath.section];
     NSMutableDictionary * parameters = [NSMutableDictionary dictionary];
     parameters[@"friendsCircleId"] = model.ID;
-    parameters[@"phoneNumber"] = [LoginModel currentUser].data.users.phone;
+    parameters[@"userHouse"] = [LoginModel currentUser].currentHouseId;
     BOOL isLikeB = NO;
     for (Likes *like in model.likes) {
         if ([[LoginModel currentUser].data.users.userId isEqualToString:like.userId]) {
@@ -300,7 +297,6 @@ static NSString *const replyCellId = @"replyCellId";
         isLike = @"false";
     }
     parameters[@"isLike"] = isLike;
-    parameters[@"estates"] = [LoginModel currentUser].currentHouseId;
     parameters[@"type"] = @"likeOrDisLike";
     [XKHudView showLoadingTo:self.vc.view animated:YES];
     [HTTPClient postRequestWithURLString:@"project_war_exploded/friendsCircleServlet" timeoutInterval:10.0 parameters:parameters success:^(id responseObject) {
@@ -409,12 +405,12 @@ static NSString *const replyCellId = @"replyCellId";
     [cell setUserClickBlock:^(NSIndexPath *indexPath, Comments *comment, BOOL isReply) {
         if (isReply) {
             if ([[LoginModel currentUser].data.users.userId isEqualToString:comment.useridBecomment]) {
-                [GlobleCommonTool jumpCircleListWithUserId:comment.userid name:comment.beComments.nickname headerIcon:comment.beComments.icon];
+                [GlobleCommonTool jumpCircleListWithUserId:comment.comments.userbelonghouse.ID name:comment.beComments.nickname headerIcon:comment.beComments.icon];
             }else{
                 [GlobleCommonTool jumpPersonalDataWithUserId:comment.useridBecomment name:comment.beComments.nickname headerIcon:comment.beComments.icon];
             }
         }else{
-              [GlobleCommonTool jumpToPersonalDataOrCircleListWithUserId:comment.userid name:comment.comments.nickname headerIcon:comment.comments.icon];
+              [GlobleCommonTool jumpToPersonalDataOrCircleListWithUserId:comment.comments.userbelonghouse.ID name:comment.comments.nickname headerIcon:comment.comments.icon];
         }
         
     }];

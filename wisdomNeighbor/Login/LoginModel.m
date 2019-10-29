@@ -20,6 +20,14 @@
              };
 }
 @end
+
+@implementation LoginModelUserbelonghouse
++ (NSDictionary *)modelCustomPropertyMapper {
+    return @{@"ID" : @"id",
+             };
+}
+@end
+
 @implementation LoginModelHouses
 + (NSDictionary *)modelCustomPropertyMapper {
     return @{@"housesId" : @"id",

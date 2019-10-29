@@ -37,7 +37,13 @@
              };
 }
 @end
-
+@implementation Userbelonghouse
++ (NSDictionary *)modelCustomPropertyMapper {
+    return @{
+             @"ID" : @"id",
+             };
+}
+@end
 @implementation SendUser
 + (NSDictionary *)modelCustomPropertyMapper {
     return @{

@@ -214,7 +214,6 @@
 		3B9139FA233B010900EB207A /* UIView+ShadowPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B9139F9233B010900EB207A /* UIView+ShadowPath.m */; };
 		3BB862DB2334B43A00564C88 /* XKBottomBtnsSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BB862D12334B43A00564C88 /* XKBottomBtnsSheetView.m */; };
 		3BB862DC2334B43A00564C88 /* XKBottomAlertSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BB862D22334B43A00564C88 /* XKBottomAlertSheetView.m */; };
-		3BB862DD2334B43A00564C88 /* XKPayAlertSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BB862D32334B43A00564C88 /* XKPayAlertSheetView.m */; };
 		3BB862DE2334B43A00564C88 /* XKBottomAlertSheetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BB862D42334B43A00564C88 /* XKBottomAlertSheetCell.m */; };
 		3BB862DF2334B43A00564C88 /* XKPhotoPickHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BB862D52334B43A00564C88 /* XKPhotoPickHelper.m */; };
 		3BB862E02334B43A00564C88 /* XKCommonSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BB862D72334B43A00564C88 /* XKCommonSheetView.m */; };
@@ -684,14 +683,12 @@
 		3BB862D02334B43A00564C88 /* XKCommonSheetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XKCommonSheetView.h; sourceTree = "<group>"; };
 		3BB862D12334B43A00564C88 /* XKBottomBtnsSheetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XKBottomBtnsSheetView.m; sourceTree = "<group>"; };
 		3BB862D22334B43A00564C88 /* XKBottomAlertSheetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XKBottomAlertSheetView.m; sourceTree = "<group>"; };
-		3BB862D32334B43A00564C88 /* XKPayAlertSheetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XKPayAlertSheetView.m; sourceTree = "<group>"; };
 		3BB862D42334B43A00564C88 /* XKBottomAlertSheetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XKBottomAlertSheetCell.m; sourceTree = "<group>"; };
 		3BB862D52334B43A00564C88 /* XKPhotoPickHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XKPhotoPickHelper.m; sourceTree = "<group>"; };
 		3BB862D62334B43A00564C88 /* XKBottomBtnsSheetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XKBottomBtnsSheetView.h; sourceTree = "<group>"; };
 		3BB862D72334B43A00564C88 /* XKCommonSheetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XKCommonSheetView.m; sourceTree = "<group>"; };
 		3BB862D82334B43A00564C88 /* XKBottomAlertSheetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XKBottomAlertSheetView.h; sourceTree = "<group>"; };
 		3BB862D92334B43A00564C88 /* XKBottomAlertSheetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XKBottomAlertSheetCell.h; sourceTree = "<group>"; };
-		3BB862DA2334B43A00564C88 /* XKPayAlertSheetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XKPayAlertSheetView.h; sourceTree = "<group>"; };
 		3BB862E12334B54100564C88 /* UIView+Border.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Border.h"; sourceTree = "<group>"; };
 		3BB862E22334B54100564C88 /* UIView+Border.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Border.m"; sourceTree = "<group>"; };
 		3BB862E32334B54100564C88 /* UIView+Corner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Corner.h"; sourceTree = "<group>"; };
@@ -1718,12 +1715,10 @@
 				3BB862D62334B43A00564C88 /* XKBottomBtnsSheetView.h */,
 				3BB862D82334B43A00564C88 /* XKBottomAlertSheetView.h */,
 				3BB862D22334B43A00564C88 /* XKBottomAlertSheetView.m */,
-				3BB862D32334B43A00564C88 /* XKPayAlertSheetView.m */,
 				3BB862D42334B43A00564C88 /* XKBottomAlertSheetCell.m */,
 				3BB862D52334B43A00564C88 /* XKPhotoPickHelper.m */,
 				3BB862D72334B43A00564C88 /* XKCommonSheetView.m */,
 				3BB862D92334B43A00564C88 /* XKBottomAlertSheetCell.h */,
-				3BB862DA2334B43A00564C88 /* XKPayAlertSheetView.h */,
 				3B37CE73235597C30058FEEA /* XKAttributedBottomAlertSheetView.h */,
 				3B37CE74235597C40058FEEA /* XKAttributedBottomAlertSheetView.m */,
 			);
@@ -2408,7 +2403,6 @@
 				3B40890E23293EE100002108 /* UIImage+Addtions.m in Sources */,
 				3B408975232941CB00002108 /* YYTextParser.m in Sources */,
 				3B40897E232941CB00002108 /* UIView+YYText.m in Sources */,
-				3BB862DD2334B43A00564C88 /* XKPayAlertSheetView.m in Sources */,
 				3B40890F23293EE100002108 /* UIImage+Edit.m in Sources */,
 				3B40899E232946E100002108 /* MineRootViewController.m in Sources */,
 				3BB863022334CF7600564C88 /* XKFriendCicleToolView.m in Sources */,

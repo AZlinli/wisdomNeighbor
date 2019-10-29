@@ -92,7 +92,7 @@
     vc.name = name;
     vc.headerIcon = headerIcon;
     vc.userId = userId;
-    if ([[LoginModel currentUser].data.users.userId isEqualToString:userId]) {
+    if ([[LoginModel currentUser].currentHouseId isEqualToString:userId]) {
         vc.vcType = personalVcTypeMine;
     }else{
         vc.vcType = personalVcTypeOther;
@@ -101,7 +101,7 @@
 }
 
 + (void)jumpToPersonalDataOrCircleListWithUserId:(NSString *)userId name:(NSString *)name headerIcon:(NSString *)headerIcon {
-    if ([[LoginModel currentUser].data.users.userId isEqualToString:userId]) {
+    if ([[LoginModel currentUser].currentHouseId isEqualToString:userId]) {
         [GlobleCommonTool jumpCircleListWithUserId:userId name:name headerIcon:headerIcon];
     }else{
         [GlobleCommonTool jumpPersonalDataWithUserId:userId name:name headerIcon:headerIcon];

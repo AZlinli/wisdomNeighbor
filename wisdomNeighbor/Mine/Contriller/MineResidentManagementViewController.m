@@ -42,8 +42,7 @@
 - (void)loadUserList {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"type"] = @"getUsersByme";
-    parameters[@"phoneNumber"] = [LoginModel currentUser].data.users.phone;
-    parameters[@"houseId"] =  [LoginModel currentUser].currentHouseId;
+    parameters[@"userHouse"] = [LoginModel currentUser].currentHouseId;
     [self.dataArray removeAllObjects];
     [HTTPClient postRequestWithURLString:@"project_war_exploded/userServlet" timeoutInterval:20.0 parameters:parameters success:^(id responseObject) {
         MineResidentRedactModel *model = [MineResidentRedactModel yy_modelWithJSON:responseObject];
@@ -53,7 +52,7 @@
         NSMutableArray *array3 = [NSMutableArray array];
         MineResidentRedactModelData *mineModel = [MineResidentRedactModelData new];
         mineModel.nickname = [LoginModel currentUser].data.users.nickname;
-        mineModel.usertype = [LoginModel currentUser].data.users.usertype;
+        mineModel.usertype = [LoginModel currentUser].currentUserType;
         [array1 addObject:mineModel];
         
         for (MineResidentRedactModelData *mmodel in modelArray) {
@@ -216,7 +215,7 @@
     MineResidentRedactModelData *model = self.dataArray[indexPath.section][indexPath.row];
 
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [self deleteUserWithId:model.userId complete:^ (BOOL success){
+        [self deleteUserWithId:model.userbelonghouse.ID complete:^ (BOOL success){
             [ws.dataArray removeObject:model];
             NSMutableArray *sectionArray = self.dataArray[indexPath.section];
             [sectionArray removeObjectAtIndex:indexPath.row];
@@ -248,8 +247,8 @@
 - (void)deleteUserWithId:(NSString *)userId complete:(void(^)(BOOL success))complete{
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"type"] = @"deleteUser";
-    parameters[@"phoneNumber"] = [LoginModel currentUser].data.users.phone;
-    parameters[@"userId"] =  userId;
+    parameters[@"userHouse"] = [LoginModel currentUser].currentHouseId;
+    parameters[@"userBelongHouseId"] =  userId;
     [XKHudView showLoadingTo:self.tableView animated:YES];
     [HTTPClient postRequestWithURLString:@"project_war_exploded/userServlet" timeoutInterval:20.0 parameters:parameters success:^(id responseObject) {
         [XKHudView hideHUDForView:self.tableView];

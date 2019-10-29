@@ -313,7 +313,7 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
     [self.session stopRunning];
     [self.player stopPlayer];
     [self.motionManager stopDeviceMotionUpdates];
-    [self dismissViewControllerAnimated:YES completion:^{
+     [self dismissViewControllerAnimated:YES completion:^{
 //        [Utility hideProgressDialog];
     }];
 }

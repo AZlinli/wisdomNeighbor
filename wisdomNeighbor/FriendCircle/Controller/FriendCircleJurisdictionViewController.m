@@ -103,7 +103,7 @@
     XKWeakSelf(ws);
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"type"] = @"getDislikeUser";
-    parameters[@"phoneNumber"] = [LoginModel currentUser].data.users.phone;
+    parameters[@"userHouse"] = [LoginModel currentUser].currentHouseId;
     [XKHudView showLoadingTo:self.tableView animated:YES];
     [HTTPClient postRequestWithURLString:@"project_war_exploded/userServlet" timeoutInterval:20.0 parameters:parameters success:^(id responseObject) {
         [XKHudView hideHUDForView:self.tableView];
@@ -139,7 +139,7 @@
     parameters[@"type"] = @"disLikeOne";
     parameters[@"dislikeOrCancle"] = dislikeOrCancleStr;
     parameters[@"disLikeUserId"] = self.userId;
-    parameters[@"phoneNumber"] = [LoginModel currentUser].data.users.phone;
+    parameters[@"userHouse"] = [LoginModel currentUser].currentHouseId;
     [XKHudView showLoadingTo:self.tableView animated:YES];
     [HTTPClient postRequestWithURLString:@"project_war_exploded/userServlet" timeoutInterval:20.0 parameters:parameters success:^(id responseObject) {
         [XKHudView hideHUDForView:self.tableView];

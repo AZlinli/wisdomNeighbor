@@ -11,25 +11,14 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface LoginModelUsers :NSObject
-@property (nonatomic , copy) NSString              * userId;
-@property (nonatomic , copy) NSString              * createuserid;
-@property (nonatomic , copy) NSString              * createtime;
 @property (nonatomic , copy) NSString              * phone;
-@property (nonatomic , copy) NSString              * enterercode;
-@property (nonatomic , copy) NSString              * logintime;
-@property (nonatomic , copy) NSString              * friendscirclelastuser;
-@property (nonatomic , copy) NSString              * friendsremindnum;
-@property (nonatomic , copy) NSString              * likes;
-@property (nonatomic , copy) NSString              * belonghouse;
-@property (nonatomic , copy) NSString              * nowuseestates;
-@property (nonatomic , copy) NSString              * sex;
-@property (nonatomic , copy) NSString              * password;
-@property (nonatomic , copy) NSString              * icon;
 @property (nonatomic , copy) NSString              * truename;
-@property (nonatomic , copy) NSString              * usertype;
+@property (nonatomic , copy) NSString              * userId;
 @property (nonatomic , copy) NSString              * nickname;
-@property (nonatomic , copy) NSString              * dislikes;
-@property (nonatomic , copy) NSString              * status;
+@property (nonatomic , copy) NSString              * createtime;
+@property (nonatomic , copy) NSString              * icon;
+@property (nonatomic , copy) NSString              * sex;
+
 
 @end
 
@@ -45,12 +34,30 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface LoginModelUserbelonghouse :NSObject
+@property (nonatomic , copy) NSString              * estate;
+@property (nonatomic , copy) NSString              * friendscirclelastuser;
+@property (nonatomic , copy) NSString              * friendsremindnum;
+@property (nonatomic , copy) NSString              * houseid;
+@property (nonatomic , copy) NSString              * ID;
+@property (nonatomic , copy) NSString              * status;
+@property (nonatomic , copy) NSString              * userid;
+@property (nonatomic , copy) NSString              * usertype;
+@property (nonatomic , copy) NSString              * enterercode;
+@property (nonatomic , copy) NSString              * dislike;
+@property (nonatomic , copy) NSString              * createbyuser;
+
+@end
+
+
+
 @interface LoginModelHouses :NSObject
 @property (nonatomic , copy) NSString              * housesId;
 @property (nonatomic , copy) NSString              * belongestates;
 @property (nonatomic , copy) NSString              * createtime;
 @property (nonatomic , strong) LoginModelEstates              * estates;
 @property (nonatomic , copy) NSString              * inestateslocation;
+@property (nonatomic , strong) LoginModelUserbelonghouse              * userbelonghouse;
 
 @end
 
@@ -68,6 +75,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**房屋id*/
 @property(nonatomic, copy) NSString *currentHouseId;
 @property(nonatomic, copy) NSString *currentHouseName;
+@property(nonatomic, copy) NSString *currentUserType;
 
 
 /**取得当前用户*/

@@ -106,7 +106,7 @@ safari浏览器测试：
     }
     if ([url.host isEqualToString:@"safepay"] ||
         [url.host isEqualToString:@"pay"]) {
-//        处理微信支付、支付宝支付的支付结果
+//       
         return [self payCenterApplication:app handleOpenURL:url];
     }
 //    极光推送

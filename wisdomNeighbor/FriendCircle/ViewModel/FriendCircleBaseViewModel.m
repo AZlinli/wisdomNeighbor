@@ -40,7 +40,7 @@ static NSString *const replyCellId = @"replyCellId";
 - (void)requestDelete:(NSString *)did Complete:(void (^)(NSString *err, id data))completeBlock {
     NSMutableDictionary *params = @{}.mutableCopy;
     params[@"type"] = @"deleteOneFriendCircle";
-    params[@"phoneNumber"] = [LoginModel currentUser].data.users.phone;
+    params[@"userHouse"] = [LoginModel currentUser].currentHouseId;
     params[@"friendsCircleId"] = did;
 
     [HTTPClient postRequestWithURLString:@"project_war_exploded/friendsCircleServlet" timeoutInterval:20 parameters:params success:^(id responseObject) {

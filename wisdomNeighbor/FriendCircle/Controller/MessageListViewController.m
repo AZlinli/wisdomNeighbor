@@ -68,7 +68,7 @@
 - (void)loadData {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"type"] = @"getMeCommentsList";
-    parameters[@"phoneNumber"] = [LoginModel currentUser].data.users.phone;
+    parameters[@"userHouse"] = [LoginModel currentUser].currentHouseId;
     parameters[@"lastId"] = @"0";
     [HTTPClient postRequestWithURLString:@"project_war_exploded/commentsServlet" timeoutInterval:20.0 parameters:parameters success:^(id responseObject) {
         NSArray *modelArray = [NSArray yy_modelArrayWithClass:[MessageListModelData class] json:responseObject[@"data"]];

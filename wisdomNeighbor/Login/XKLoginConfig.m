@@ -39,8 +39,7 @@
 + (void)getToken {
     NSMutableDictionary * parameters = [NSMutableDictionary dictionary];
     parameters[@"type"] = @"getToken";
-    parameters[@"phoneNumber"] = [LoginModel currentUser].data.users.phone;
-    
+    parameters[@"userHouse"] = [LoginModel currentUser].currentHouseId;
     [HTTPClient postRequestWithURLString:@"project_war_exploded/imServlet" timeoutInterval:30 parameters:parameters success:^(id responseObject) {
         NSLog(@"%@", responseObject);
         XKUserInfo *user = [[XKUserInfo alloc]init];

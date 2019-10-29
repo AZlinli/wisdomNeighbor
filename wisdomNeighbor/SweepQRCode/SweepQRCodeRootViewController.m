@@ -66,7 +66,7 @@
 - (void)loadQrCode {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"type"] = @"getTempErcode";
-    parameters[@"phoneNumber"] = [LoginModel currentUser].data.users.phone;
+    parameters[@"userHouse"] = [LoginModel currentUser].currentHouseId;
 
     [HTTPClient postRequestWithURLString:@"project_war_exploded/ercodeServlet" timeoutInterval:20.0 parameters:parameters success:^(id responseObject) {
         NSString *codeStr = responseObject[@"data"][@"ercode"];
@@ -80,7 +80,7 @@
 - (void)loadBanner {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"type"] = @"getBanner";
-    parameters[@"phoneNumber"] = [LoginModel currentUser].data.users.phone;
+    parameters[@"userHouse"] = [LoginModel currentUser].currentHouseId;
     parameters[@"estates"] = [LoginModel currentUser].currentHouseId;
     [HTTPClient postRequestWithURLString:@"project_war_exploded/bannerServlet" timeoutInterval:20.0 parameters:parameters success:^(id responseObject) {
         BannerModel *model = [BannerModel yy_modelWithJSON:responseObject];
@@ -279,8 +279,8 @@
 - (void)changeLoadQrCode {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"type"] = @"refreshLocalUserErcode";
-    parameters[@"phoneNumber"] = [LoginModel currentUser].data.users.phone;
-    
+    parameters[@"userHouse"] = [LoginModel currentUser].currentHouseId;
+
     [HTTPClient postRequestWithURLString:@"project_war_exploded/ercodeServlet" timeoutInterval:20.0 parameters:parameters success:^(id responseObject) {
         NSString *codeStr = responseObject[@"data"];
         self.codeLabel.text = [NSString stringWithFormat:@"门禁码:%@",codeStr];

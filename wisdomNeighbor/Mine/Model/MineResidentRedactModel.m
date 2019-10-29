@@ -7,10 +7,15 @@
 //
 
 #import "MineResidentRedactModel.h"
-
+@implementation MineResidentRedactModelUserbelonghouse
++ (NSDictionary *)modelCustomPropertyMapper {
+    return @{@"ID" : @"id",
+             };
+}
+@end
 @implementation MineResidentRedactModelData
 + (NSDictionary *)modelCustomPropertyMapper {
-    return @{@"userId" : @"id",
+    return @{@"ID" : @"id",
              };
 }
 @end

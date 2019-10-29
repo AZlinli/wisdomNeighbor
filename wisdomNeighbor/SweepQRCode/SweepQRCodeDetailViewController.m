@@ -53,8 +53,8 @@
 - (void)loadQrCode {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"type"] = @"getTempErcode";
-    parameters[@"phoneNumber"] = [LoginModel currentUser].data.users.phone;
-    
+    parameters[@"userHouse"] = [LoginModel currentUser].currentHouseId;
+
     [HTTPClient postRequestWithURLString:@"project_war_exploded/ercodeServlet" timeoutInterval:20.0 parameters:parameters success:^(id responseObject) {
         NSString *codeStr = responseObject[@"data"][@"ercode"];
         self.codeString = codeStr;
@@ -125,7 +125,7 @@
     [self.view addSubview:self.contentTitleLabel];
     [self.contentView addSubview:self.contentNumLabel];
     [self.view addSubview:self.copyButton];
-    if ([[LoginModel currentUser].data.users.usertype isEqualToString:@"1"] || [[LoginModel currentUser].data.users.usertype isEqualToString:@"2"]) {
+    if ([[LoginModel currentUser].currentUserType isEqualToString:@"1"] || [[LoginModel currentUser].currentUserType isEqualToString:@"2"]) {
         [self creatView];
     }
     

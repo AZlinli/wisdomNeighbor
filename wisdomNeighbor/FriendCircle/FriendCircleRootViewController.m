@@ -42,7 +42,7 @@
     [self createUI];
     [self hideNavigationSeperateLine];
     //如果是便捷卡就不能发布朋友圈
-    if ([[LoginModel currentUser].data.users.usertype isEqualToString:@"6"]) {
+    if ([[LoginModel currentUser].currentUserType isEqualToString:@"6"]) {
         
     }else{
         [self setNavRightButton];
@@ -121,8 +121,7 @@
 - (void)loadNewNotice {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"type"] = @"getNewNotice";
-    parameters[@"phoneNumber"] = [LoginModel currentUser].data.users.phone;
-    parameters[@"estates"] = [LoginModel currentUser].currentHouseId;
+    parameters[@"userHouse"] = [LoginModel currentUser].currentHouseId;
     [HTTPClient postRequestWithURLString:@"project_war_exploded/noticeServlet" timeoutInterval:20.0 parameters:parameters success:^(id responseObject) {
         NoticeModelData *model =  [NoticeModelData yy_modelWithJSON:responseObject[@"data"]];
         self.noticeModelData = model;
@@ -135,7 +134,7 @@
 - (void)loadNewMessage {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"type"] = @"getNewComments";
-    parameters[@"phoneNumber"] = [LoginModel currentUser].data.users.phone;
+    parameters[@"userHouse"] = [LoginModel currentUser].currentHouseId;
 
     [HTTPClient postRequestWithURLString:@"project_war_exploded/friendsCircleServlet" timeoutInterval:20.0 parameters:parameters success:^(id responseObject) {
         self.remindNumber = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"remindNumber"]];
@@ -344,7 +343,7 @@
 }
 
 - (void)headerTap:(UIGestureRecognizer *)sender {
-    [GlobleCommonTool jumpCircleListWithUserId:[LoginModel currentUser].data.users.userId name:[LoginModel currentUser].data.users.nickname headerIcon:[LoginModel currentUser].data.users.icon];
+    [GlobleCommonTool jumpCircleListWithUserId:[LoginModel currentUser].currentHouseId name:[LoginModel currentUser].data.users.nickname headerIcon:[LoginModel currentUser].data.users.icon];
 }
 
 
@@ -395,7 +394,7 @@
 - (void)loadData {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"type"] = @"getMeCommentsList";
-    parameters[@"phoneNumber"] = [LoginModel currentUser].data.users.phone;
+    parameters[@"userHouse"] = [LoginModel currentUser].currentHouseId;
     parameters[@"lastId"] = @"0";
     [HTTPClient postRequestWithURLString:@"project_war_exploded/commentsServlet" timeoutInterval:20.0 parameters:parameters success:^(id responseObject) {
         NSArray *modelArray = [NSArray yy_modelArrayWithClass:[MessageListModelData class] json:responseObject[@"data"]];
