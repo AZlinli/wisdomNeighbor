@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Bucket
+   uuid = "CF7F3520-BD2A-4D41-A77B-73EC8770A185"
    type = "0"
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
          <BreakpointContent
+            uuid = "B817D540-D4A9-425A-AFED-6D3C405EB6C1"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -16,6 +18,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "BB4F4885-8B66-4596-87A0-D0D206C9969F"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -32,6 +35,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "CA6D1B21-259E-46D3-9957-B72D68C35FA5"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -48,11 +52,12 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "45E8876A-58A1-43C8-BE42-A32498A78AF2"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "wisdomNeighbor/FriendCircle/ViewModel/XKFriendCirclePublishViewModel.m"
-            timestampString = "594025282.332605"
+            timestampString = "594026979.2620389"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "129"
@@ -64,11 +69,12 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "D0327D66-8A6A-447C-B88D-00C049B4EC71"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "wisdomNeighbor/FriendCircle/ViewModel/XKFriendCirclePublishViewModel.m"
-            timestampString = "594025463.311277"
+            timestampString = "594026979.262113"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "71"
@@ -77,6 +83,7 @@
             landmarkType = "7">
             <Locations>
                <Location
+                  uuid = "D0327D66-8A6A-447C-B88D-00C049B4EC71 - 90cf6620f9b0db05"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -84,7 +91,6 @@
                   moduleName = "wisdomNeighbor"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/linli/Desktop/wisdomNeighbor/wisdomNeighbor/FriendCircle/ViewModel/XKFriendCirclePublishViewModel.m"
-                  timestampString = "594025463.321942"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "71"
@@ -92,6 +98,7 @@
                   offsetFromSymbolStart = "100">
                </Location>
                <Location
+                  uuid = "D0327D66-8A6A-447C-B88D-00C049B4EC71 - 2b11046c84e20ab6"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -99,7 +106,6 @@
                   moduleName = "wisdomNeighbor"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/linli/Desktop/wisdomNeighbor/wisdomNeighbor/FriendCircle/ViewModel/XKFriendCirclePublishViewModel.m"
-                  timestampString = "594025463.325918"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "71"
@@ -112,59 +118,12 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "CD453C37-EC8A-40F9-AF43-54EADBF068A4"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "wisdomNeighbor/FriendCircle/ViewModel/XKFriendCirclePublishViewModel.m"
-            timestampString = "594025481.3505599"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "112"
-            endingLineNumber = "112"
-            landmarkName = "-requestUploadVideoInfo:complete:"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[XKFriendCirclePublishViewModel requestUploadVideoInfo:complete:]"
-                  moduleName = "wisdomNeighbor"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/linli/Desktop/wisdomNeighbor/wisdomNeighbor/FriendCircle/ViewModel/XKFriendCirclePublishViewModel.m"
-                  timestampString = "594025481.360149"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "112"
-                  endingLineNumber = "112"
-                  offsetFromSymbolStart = "328">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__66-[XKFriendCirclePublishViewModel requestUploadVideoInfo:complete:]_block_invoke"
-                  moduleName = "wisdomNeighbor"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/linli/Desktop/wisdomNeighbor/wisdomNeighbor/FriendCircle/ViewModel/XKFriendCirclePublishViewModel.m"
-                  timestampString = "594025481.363284"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "112"
-                  endingLineNumber = "112"
-                  offsetFromSymbolStart = "16">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "wisdomNeighbor/FriendCircle/ViewModel/XKFriendCirclePublishViewModel.m"
-            timestampString = "594025484.295584"
+            timestampString = "594026979.262163"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "110"
@@ -176,11 +135,12 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "79145054-8DE8-40F6-BCCD-A5242A3F067D"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "wisdomNeighbor/FriendCircle/ViewModel/XKFriendCirclePublishViewModel.m"
-            timestampString = "594025525.869072"
+            timestampString = "594026979.262208"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "84"
@@ -192,15 +152,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "9B43E41C-E68D-4B01-B486-062DE154A98C"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "wisdomNeighbor/3lib/Tool/QCloudManager.m"
-            timestampString = "594025607.881593"
+            timestampString = "594026979.262256"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
             landmarkName = "-uploadVideoWithUrl:FirstImg:WithKey:Success:Failure:"
             landmarkType = "7">
          </BreakpointContent>
@@ -208,16 +169,135 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "5878E21E-678E-4A18-A960-C5F30E8B6CA7"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "wisdomNeighbor/3lib/Tool/QCloudManager.m"
-            timestampString = "594025632.212641"
+            timestampString = "594026979.262612"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
             landmarkName = "-uploadVideoWithUrl:FirstImg:WithKey:Success:Failure:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6BCCFC9F-5002-4DB3-BDFA-2D0FFD91B9B8"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "wisdomNeighbor/FriendCircle/ViewModel/XKFriendCirclePublishViewModel.m"
+            timestampString = "594026979.262867"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
+            landmarkName = "-requestUploadVideoInfo:complete:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6875AB53-FCD2-4426-8DE9-B24DFE9D8F8B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "wisdomNeighbor/FriendCircle/ViewModel/XKFriendCirclePublishViewModel.m"
+            timestampString = "594026979.262917"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
+            landmarkName = "-requestUploadVideoInfo:complete:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "107A4008-64F8-4B24-B484-DD4611F9BA76"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "wisdomNeighbor/3lib/Tool/QCloudManager.m"
+            timestampString = "594026979.262966"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
+            landmarkName = "-uploadVideoWithUrl:FirstImg:WithKey:Success:Failure:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3F5CBAC5-75B5-4A88-BC07-E6D9F7031348"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "wisdomNeighbor/3lib/Tool/QCloudManager.m"
+            timestampString = "594026979.263208"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
+            landmarkName = "-uploadVideoWithUrl:FirstImg:WithKey:Success:Failure:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "AF185121-EB52-457C-B941-4490E2D997B2"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "wisdomNeighbor/3lib/Tool/QCloudManager.m"
+            timestampString = "594026979.26345"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
+            landmarkName = "-uploadVideoWithUrl:FirstImg:WithKey:Success:Failure:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "ECA8CB3B-645A-45D2-B04B-7C30F37540B8"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "wisdomNeighbor/3lib/Tool/QCloudManager.m"
+            timestampString = "594026979.263713"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
+            landmarkName = "-uploadVideoWithUrl:WithKey:Success:Failure:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "270DB659-83CD-4648-9D1E-5DFC825077AF"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "wisdomNeighbor/Login/VerificationNextViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
+            landmarkName = "-phoneTextFieldAction:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -43,7 +43,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = HEX_RGB(0xf6f6f6);
+//    self.view.backgroundColor = HEX_RGB(0xf6f6f6);
+    self.view.backgroundColor = HEX_RGB(0xffffff);
     [self setNavTitle:[NSString stringWithFormat:@"%@小区",[LoginModel currentUser].currentHouseName] WithColor:HEX_RGB(0x222222)];
     [self hiddenBackButton:YES];
     [self hideNavigation];
@@ -131,7 +132,7 @@
         make.centerX.equalTo(self.qrcodeView);
         make.width.mas_equalTo(100);
         make.height.mas_equalTo(20);
-        make.bottom.equalTo(self.codeView.mas_top).offset(-30);
+        make.bottom.equalTo(self.codeView.mas_top).offset(-40);
     }];
     
     [self.codeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -209,7 +210,7 @@
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
         _titleLabel = [UILabel new];
-        _titleLabel.font = [UIFont systemFontOfSize:14];
+        _titleLabel.font = [UIFont systemFontOfSize:16];
         _titleLabel.text = [NSString stringWithFormat:@"%@",[LoginModel currentUser].currentHouseName];
         _titleLabel.textColor = HEX_RGB(0x222222);
         _titleLabel.textAlignment = NSTextAlignmentCenter;

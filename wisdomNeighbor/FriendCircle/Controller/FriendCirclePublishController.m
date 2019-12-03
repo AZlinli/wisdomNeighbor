@@ -115,7 +115,7 @@
     [contentView addSubview:line];
     [line mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(contentView);
-        make.top.equalTo(lineTopView.mas_bottom).offset(15);
+        make.top.equalTo(lineTopView.mas_bottom).offset(105);
         make.height.equalTo(@1);
     }];
     
@@ -182,16 +182,17 @@
 //    其他（帮个忙、搭把手、吐吐槽、晒晒宠….）
     [_settingView bk_whenTapped:^{
         NSAttributedString *str1 = [NSAttributedString rz_colorfulConfer:^(RZColorfulConferrer *confer) {
-            confer.text(@"约").textColor(RGB(216, 123, 140)).font(XKRegularFont(14));
+            confer.text(@"约").textColor(HEX_RGB(0xfc656f)).font(XKRegularFont(14));
             confer.text(@"（饭局、牌局、游戏、旅游或者看书学习….）").textColor(RGB(106, 106, 106)).font(XKRegularFont(14));
         }];
         NSAttributedString *str2 = [NSAttributedString rz_colorfulConfer:^(RZColorfulConferrer *confer) {
-            confer.text(@"卖").textColor(RGB(222, 222, 183)).font(XKRegularFont(14));
+            confer.text(@"卖").textColor(HEX_RGB(0xffd39b)).font(XKRegularFont(14));
             confer.text(@"（厨艺、宝贝、车位、房子也行）").textColor(RGB(106, 106, 106)).font(XKRegularFont(14));
 
         }];
         NSAttributedString *str3 = [NSAttributedString rz_colorfulConfer:^(RZColorfulConferrer *confer) {
-            confer.text(@"送").textColor(RGB(78, 138, 188)).font(XKRegularFont(14));
+            confer.text(@"送").textColor(HEX_RGB(0x1b82d1
+)).font(XKRegularFont(14));
             confer.text(@"（首饰啊、项链啊、月光宝盒啥的）").textColor(RGB(106, 106, 106)).font(XKRegularFont(14));
 
         }];
@@ -203,8 +204,8 @@
         NSAttributedString *str5 = [NSAttributedString rz_colorfulConfer:^(RZColorfulConferrer *confer) {
             confer.text(@"取消").textColor(RGB(106, 106, 106)).font(XKRegularFont(14));
         }];
-        XKAttributedBottomAlertSheetView *sheet = [[XKAttributedBottomAlertSheetView alloc] initWithBottomSheetViewWithDataSource:@[str1,str2,str3,str4,str5]choseBlock:^(NSInteger index, NSString *choseTitle){
-            ws.settingView.detailLabel.text = choseTitle;
+        XKAttributedBottomAlertSheetView *sheet = [[XKAttributedBottomAlertSheetView alloc] initWithBottomSheetViewWithDataSource:@[str1,str2,str3,str4,str5]choseBlock:^(NSInteger index, NSAttributedString *choseTitle){
+            ws.settingView.detailLabel.attributedText = choseTitle;
 
             switch (index) {
                 case 0:{
@@ -397,7 +398,7 @@
             self.publishBtn.userInteractionEnabled = YES;
             [XKHudView showErrorMessage:error to:weakSelf.view animated:YES];;
         } else {
-            [XKHudView showSuccessMessage:@"发布成功" to:self.view time:2 animated:YES completion:^{
+            [XKHudView showSuccessMessage:@"你的动态已经提交成功，24小时内审核通过后别人才能查看" to:self.view time:2 animated:YES completion:^{
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(),
                                ^{
                                    EXECUTE_BLOCK(self.publishSuccess);

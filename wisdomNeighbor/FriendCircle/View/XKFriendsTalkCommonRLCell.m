@@ -102,8 +102,9 @@ static CGFloat xkFriendTalkContentMaxHeight = 0;
     _headerImageView = [[UIImageView alloc] init];
     _headerImageView.contentMode = UIViewContentModeScaleAspectFill;
     _headerImageView.userInteractionEnabled = YES;
-    _headerImageView.clipsToBounds = YES;
-    _headerImageView.layer.cornerRadius = 4;
+    _headerImageView.xk_radius = 8;
+    _headerImageView.xk_openClip = YES;
+    _headerImageView.xk_clipType = XKCornerClipTypeAllCorners;
     [_headerImageView bk_whenTapped:^{
         [GlobleCommonTool jumpToPersonalDataOrCircleListWithUserId:self.model.sendUser.userbelonghouse.ID name:self.model.sendUser.nickname headerIcon:self.model.sendUser.icon];
     }];
@@ -112,7 +113,7 @@ static CGFloat xkFriendTalkContentMaxHeight = 0;
     _nameLabel = [[UILabel alloc] init];
     _nameLabel.font = kFontSize6(14);
     _nameLabel.userInteractionEnabled = YES;
-    _nameLabel.textColor = HEX_RGB(0x222222);
+    _nameLabel.textColor = HEX_RGB(0x1B82D1);
     [_nameLabel bk_whenTapped:^{
         [GlobleCommonTool jumpToPersonalDataOrCircleListWithUserId:self.model.sendUser.userbelonghouse.ID name:self.model.sendUser.nickname headerIcon:self.model.sendUser.icon];
     }];
@@ -124,6 +125,9 @@ static CGFloat xkFriendTalkContentMaxHeight = 0;
     _tagLabel1.textAlignment = NSTextAlignmentCenter;
     _tagLabel1.textColor = HEX_RGB(0xffffff);
     _tagLabel1.backgroundColor = HEX_RGB(0xFC656F);
+    _tagLabel1.xk_clipType = XKCornerClipTypeAllCorners;
+    _tagLabel1.xk_openClip = YES;
+    _tagLabel1.xk_radius = 4;
     [self.contentView addSubview:_tagLabel1];
     
     /**标签2*/
@@ -133,6 +137,9 @@ static CGFloat xkFriendTalkContentMaxHeight = 0;
     _tagLabel2.textAlignment = NSTextAlignmentCenter;
     _tagLabel2.backgroundColor = HEX_RGB(0x1B82D1);
     _tagLabel2.textColor = HEX_RGB(0xffffff);
+    _tagLabel2.xk_clipType = XKCornerClipTypeAllCorners;
+    _tagLabel2.xk_openClip = YES;
+    _tagLabel2.xk_radius = 4;
     [self.contentView addSubview:_tagLabel2];
     
     /**地址*/

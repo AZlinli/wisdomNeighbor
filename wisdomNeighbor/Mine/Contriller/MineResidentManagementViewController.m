@@ -7,7 +7,7 @@
 //
 
 #import "MineResidentManagementViewController.h"
-#import "MinePersonalTableViewCell.h"
+#import "MineResidentRedactRootTableViewCell.h"
 #import "MineResidentRedactViewController.h"
 #import "MineResidentRedactModel.h"
 
@@ -82,7 +82,7 @@
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.bounces = NO;
         _tableView.scrollEnabled = YES;
-        [_tableView registerClass:[MinePersonalTableViewCell class] forCellReuseIdentifier:@"cell"];
+        [_tableView registerNib:[UINib nibWithNibName:@"MineResidentRedactRootTableViewCell" bundle:nil] forCellReuseIdentifier:@"cell"];
         if (@available(iOS 11.0, *)) {
             _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
         } else {
@@ -102,23 +102,13 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MineResidentRedactModelData *model = self.dataArray[indexPath.section][indexPath.row];
-     MinePersonalTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+     MineResidentRedactRootTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     if (indexPath.row == 0 && indexPath.section == 0) {
-        [cell.titleLabel rz_colorfulConfer:^(RZColorfulConferrer * _Nonnull confer) {
-            confer.appendImage([UIImage imageNamed:@"mine_set_9"]).bounds(CGRectMake(0, -6, 20, 20));
-            confer.text(@"   ");
-            confer.text(model.nickname).textColor(HEX_RGB(0x222222)).font(XKRegularFont(14));
-        }];
+        [cell isShowNextImage:NO];
     }else{
-        cell.titleLabel.text = model.nickname;
+        [cell isShowNextImage:YES];
     }
-    if ([model.usertype isEqualToString:@"1"]) {
-        cell.rightTitlelabel.text = @"业主";
-    }else if ([model.usertype isEqualToString:@"2"]){
-        cell.rightTitlelabel.text = @"畅享卡";
-    }else if ([model.usertype isEqualToString:@"6"]){
-        cell.rightTitlelabel.text = @"便捷卡";
-    }
+    cell.model = model;
     
     return cell;
 }
@@ -178,8 +168,8 @@
     [addButton setImage:[UIImage imageNamed:@"mine_set_10"] forState:0];
     [addButton addTarget:self action:@selector(addButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [addButton setTitle:@"添加住户" forState:0];
-    [addButton setTitleColor:HEX_RGB(0x1B82D1) forState:0];
-    [addButton setBackgroundColor:HEX_RGB(0xffffff)];
+    [addButton setTitleColor:HEX_RGB(0xffffff) forState:0];
+    [addButton setBackgroundColor:HEX_RGB(0x1B82D1)];
     addButton.layer.masksToBounds = YES;
     addButton.layer.cornerRadius = 22;
     [footerView addSubview:addButton];

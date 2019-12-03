@@ -13,6 +13,7 @@
 #import "LoginModel.h"
 #import "XKLoginUserContractView.h"
 #import "XKJumpWebViewController.h"
+#import "VerificationViewController.h"
 
 @interface LoginViewController ()<UITextFieldDelegate>
 /**contentView*/
@@ -76,6 +77,10 @@
     }else{
         [self setNavTitle:@"游客登录" WithColor:HEX_RGB(0x222222)];
     }
+    
+    if (self.phone) {
+        self.phoneTextField.text = self.phone;
+    }
     [self loadUI];
 }
 
@@ -120,7 +125,11 @@
             [XKHudView showSuccessMessage:@"发送成功"];
         } failure:^(XKHttpErrror *error) {
             [XKHudView hideHUDForView:self.view  animated:YES];
-            [XKHudView showErrorMessage:error.message];
+            [XKAlertView showCommonAlertViewWithTitle:error.message rightText:@"立即验证" rightBlock:^{
+                VerificationViewController *vc = [[VerificationViewController alloc]initWithNibName:@"VerificationViewController" bundle:nil];
+                UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
+                [self presentViewController:nav animated:YES completion:nil];;
+            }];
         }];
     }else{
         [XKHudView showErrorMessage:@"请输入正确的手机号"];

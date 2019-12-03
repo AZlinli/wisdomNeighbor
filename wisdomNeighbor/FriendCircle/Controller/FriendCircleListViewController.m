@@ -10,6 +10,7 @@
 #import "FriendCircleListImageTableViewCell.h"
 #import "FriendCircleListShareTableViewCell.h"
 #import "FriendTalkModel.h"
+#import "MessageListViewController.h"
 #import "FriendCircleDetailViewController.h"
 
 @interface FriendCircleListViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -41,7 +42,7 @@
     [self requestDataRefresh:YES NeedTip:NO];
 }
 - (void)judgeCurrentUser {
-    if ([[LoginModel currentUser].data.users.userId isEqualToString:self.userId]) {
+    if ([[LoginModel currentUser].currentHouseId isEqualToString:self.userId]) {
         self.isMine = YES;
     }else{
         self.isMine = NO;
@@ -192,7 +193,7 @@
     headerView.backgroundColor = HEX_RGB(0xffffff);
     UIImageView *bgImageView = [[UIImageView alloc]init];
     bgImageView.userInteractionEnabled = YES;
-    bgImageView.image = [UIImage imageNamed:@"xk_view_bg"];
+    [GlobleCommonTool configTimeHourWith:bgImageView];
     bgImageView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 180);
     [headerView addSubview:bgImageView];
 
@@ -208,6 +209,21 @@
         make.size.mas_equalTo(CGSizeMake(9, 16));
     }];
     
+    UIButton *moreButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [moreButton setTitle:@"   " forState:UIControlStateNormal];
+    [moreButton setImage:[UIImage imageNamed:@"ic_btn_msg_circle_Comment"] forState:UIControlStateNormal];
+    [moreButton addTarget:self action:@selector(backButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [moreButton bk_whenTapped:^{
+        MessageListViewController *vc = [MessageListViewController new];
+           [self.navigationController pushViewController:vc animated:YES];
+    }];
+    [bgImageView addSubview:moreButton];
+       
+    [moreButton mas_makeConstraints:^(MASConstraintMaker *make) {
+           make.right.mas_equalTo(-17);
+           make.top.mas_equalTo(50);
+           make.size.mas_equalTo(CGSizeMake(16, 16));
+    }];
     UIImageView *headerImageView = [UIImageView new];
     [headerImageView sd_setImageWithURL:[NSURL URLWithString:self.headerIcon] placeholderImage:[UIImage imageNamed:@"xk_ic_defult_head"]];
     headerImageView.layer.masksToBounds = YES;
@@ -215,7 +231,7 @@
     headerImageView.userInteractionEnabled = YES;
     [headerView addSubview:headerImageView];
     [headerImageView bk_whenTapped:^{
-        [GlobleCommonTool jumpCircleListWithUserId:self.userId name:self.name headerIcon:self.headerIcon];
+//        [GlobleCommonTool jumpCircleListWithUserId:self.userId name:self.name headerIcon:self.headerIcon];
     }];
     [headerImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(-15);

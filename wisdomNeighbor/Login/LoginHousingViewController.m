@@ -13,6 +13,7 @@
 #import "LoginHousingModel.h"
 #import "XKMapManager.h"
 #import "XKMapLocationDelegate.h"
+#import "LoginHousingTableViewCell.h"
 
 @interface LoginHousingViewController ()<UITableViewDelegate,UITableViewDataSource,XKMapLocationDelegate>
 @property (nonatomic, strong) UITableView                     *tableView;
@@ -70,7 +71,7 @@
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 //        _tableView.tableHeaderView = [self creatHeaderView];
         _tableView.scrollEnabled = YES;
-        [_tableView registerClass:[MinePersonalTableViewCell class] forCellReuseIdentifier:@"cell"];
+        [_tableView registerNib:[UINib nibWithNibName:@"LoginHousingTableViewCell" bundle:nil]forCellReuseIdentifier:@"cell"];
         if (@available(iOS 11.0, *)) {
             _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
         } else {
@@ -88,7 +89,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     LoginModelHouses *model = self.dataArray[indexPath.row];
-        MinePersonalTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+        LoginHousingTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
 //    [cell.myContentView mas_updateConstraints:^(MASConstraintMaker *make) {
 //        make.left.mas_equalTo(15);
 //        make.right.mas_equalTo(-15);
@@ -102,8 +103,7 @@
 //    }else{
 //        cell.myContentView.xk_clipType = XKCornerClipTypeNone;
 //    }
-    cell.titleLabel.text = model.estates.name;
-    cell.rightTitlelabel.text = model.estates.locationstring;
+    cell.model = model;
         return cell;
 }
 
@@ -115,11 +115,21 @@
     return 50;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 5;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 5)];
+    headerView.backgroundColor = UIColorFromRGB(0xf6f6f6);
+    return headerView;
+}
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     LoginModelHouses *model = self.dataArray[indexPath.row];
     [LoginModel currentUser].currentHouseId = model.userbelonghouse.ID;
     [LoginModel currentUser].currentHouseName = model.estates.name;
     [LoginModel currentUser].currentUserType = model.userbelonghouse.usertype;
+    [LoginModel currentUser].currentInestateslocation = model.inestateslocation;
 
     XKUserSynchronize;
     BaseTabBarConfig *tabBarControllerConfig = [[BaseTabBarConfig alloc] init];

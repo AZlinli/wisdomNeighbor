@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 
 
-- (instancetype)initWithBottomSheetViewWithDataSource:(NSArray <NSAttributedString *>*)dataSource choseBlock:(void(^)(NSInteger index, NSString *choseTitle))choseBlock;
+- (instancetype)initWithBottomSheetViewWithDataSource:(NSArray <NSAttributedString *>*)dataSource choseBlock:(void(^)(NSInteger index, NSAttributedString *choseTitle))choseBlock;
 
 
 - (void)show;

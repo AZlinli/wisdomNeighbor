@@ -12,11 +12,11 @@
 @property (nonatomic, strong)UITableView *tableView;
 @property (nonatomic, strong)UIView *coverView;
 @property (nonatomic, strong)UIColor *titleColor;
-@property (nonatomic, copy)void(^choseBlock)(NSInteger index, NSString *choseTitle);
+@property (nonatomic, copy)void(^choseBlock)(NSInteger index, NSAttributedString *choseTitle);
 @end
 
 @implementation XKAttributedBottomAlertSheetView
-- (instancetype)initWithBottomSheetViewWithDataSource:(NSArray *)dataSource choseBlock:(void(^)(NSInteger index, NSString *choseTitle))choseBlock {
+- (instancetype)initWithBottomSheetViewWithDataSource:(NSArray *)dataSource choseBlock:(void(^)(NSInteger index, NSAttributedString *choseTitle))choseBlock {
     self = [[XKAttributedBottomAlertSheetView alloc] init];
     if(self) {
         self.dataSource = dataSource;
@@ -130,8 +130,7 @@
     if(self.choseBlock) {
         if(indexPath.section == 0) {
             NSAttributedString *titleAt = _dataSource[indexPath.row];
-            NSString *title = titleAt.string;
-            self.choseBlock(indexPath.row, title);
+            self.choseBlock(indexPath.row, titleAt);
             [self dismissSelf];
         } else {
             [self dismissSelf];

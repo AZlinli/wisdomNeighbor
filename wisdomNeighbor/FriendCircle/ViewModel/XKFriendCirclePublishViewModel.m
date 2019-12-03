@@ -128,6 +128,7 @@
     // 资源
     params[@"userHouse"] = [LoginModel currentUser].currentHouseId;
     params[@"type"] = @"sendFriendsCircle";
+    params[@"device"] = @"2";
     NSMutableDictionary *data = [NSMutableDictionary dictionary];
     data[@"locationaddress"] = self.currentAddess?:@"";
     data[@"tag"] = self.tag?:@"";

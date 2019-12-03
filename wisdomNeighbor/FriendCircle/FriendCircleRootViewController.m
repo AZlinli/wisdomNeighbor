@@ -209,11 +209,12 @@
 - (UIView *)creatHeaderView {
     CGFloat headerViewH;
     if ([self isShowMessageCountView]) {
-        headerViewH = 289;
+        headerViewH = 309;
     }else{
-        headerViewH = 289 - 79;
+        headerViewH = 309 - 79;
     }
     UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, headerViewH)];
+    headerView.backgroundColor = [UIColor whiteColor];
     UIImageView *bgImageView = [[UIImageView alloc]init];
     bgImageView.contentMode = UIViewContentModeScaleAspectFill;
     bgImageView.clipsToBounds = YES;
@@ -226,16 +227,14 @@
     [headerView addSubview:informLabelContentView];
     
     [informLabelContentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(bgImageView.mas_bottom);
+        make.top.equalTo(bgImageView.mas_bottom).offset(20);
         make.height.mas_equalTo(33);
         make.left.right.equalTo(headerView);
     }];
     
     UILabel *informLabel = [UILabel new];
     [informLabel rz_colorfulConfer:^(RZColorfulConferrer * _Nonnull confer) {
-        confer.appendImage([UIImage imageNamed:@"ic_btn_msg_circle_Comment"]).bounds(CGRectMake(0, -2, 15, 15));
-        confer.text(@" ");
-        confer.text(self.noticeModelData.title).textColor(HEX_RGB(0xFC656F)).font(XKRegularFont(14));
+        confer.text(self.noticeModelData.title).textColor(HEX_RGB(0x222222)).font(XKRegularFont(14));
     }];
     informLabel.hidden = ![self isShowNotice];
     [informLabelContentView addSubview:informLabel];
@@ -247,9 +246,16 @@
         make.left.mas_equalTo(15);
         make.right.mas_equalTo(-122);
     }];
-    
+    UIView *infoLine1 = [UIView new];
+   infoLine1.backgroundColor = XKSeparatorLineColor;
+   [informLabelContentView addSubview:infoLine1];
+   [infoLine1 mas_makeConstraints:^(MASConstraintMaker *make) {
+       make.left.right.equalTo(informLabelContentView);
+       make.height.mas_equalTo(1);
+       make.bottom.equalTo(informLabelContentView.mas_top);
+   }];
     UIView *infoLine = [UIView new];
-    infoLine.backgroundColor = HEX_RGB(0xE7E7E8);
+    infoLine.backgroundColor = XKSeparatorLineColor;
     [informLabelContentView addSubview:infoLine];
     [infoLine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(informLabelContentView);

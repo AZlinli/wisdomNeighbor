@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface LoginViewController : BaseViewController
 /**控制器类型*/
 @property(nonatomic, assign) loginVCTyoe vcType;
+/**<##>*/
+@property(nonatomic, copy) NSString *phone;
 @end
 
 NS_ASSUME_NONNULL_END

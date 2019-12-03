@@ -31,7 +31,7 @@
             FriendCirclePublishController *vc = [FriendCirclePublishController new];
             [[self getCurrentUIVC].navigationController pushViewController:vc animated:YES];
         }];
-        self.titleLabel.text = model.content;
+        self.titleLabel.text = @"";
         self.addessLabel.text = model.locationaddress;
         self.numLabel.hidden = YES;
     }else{

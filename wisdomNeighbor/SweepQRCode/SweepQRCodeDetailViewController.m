@@ -58,7 +58,14 @@
     [HTTPClient postRequestWithURLString:@"project_war_exploded/ercodeServlet" timeoutInterval:20.0 parameters:parameters success:^(id responseObject) {
         NSString *codeStr = responseObject[@"data"][@"ercode"];
         self.codeString = codeStr;
-        self.contentNumLabel.text = codeStr;
+        NSMutableAttributedString *string =[[NSMutableAttributedString alloc]initWithString:codeStr];
+        //设置字间距
+        long number = 10;
+           CFNumberRef num = CFNumberCreate(kCFAllocatorDefault,kCFNumberSInt8Type,&number);
+        [string addAttribute:(id)kCTKernAttributeName value:(__bridge id)num range:NSMakeRange(0,[string length])];
+           CFRelease(num);
+        [string addAttribute:(id)kCTForegroundColorAttributeName value:(id)([UIColor whiteColor].CGColor) range:NSMakeRange(0,[string length])];
+        self.contentNumLabel.attributedText = string;
     } failure:^(XKHttpErrror *error) {
         
     }];
@@ -192,7 +199,7 @@
         _headerLabel = [UILabel new];
         _headerLabel.numberOfLines = 0;
         [_headerLabel rz_colorfulConfer:^(RZColorfulConferrer * _Nonnull confer) {
-            confer.text(@"亲爱的用户，您的临时密码有效期为：2个小时请妥善使用临时门禁码，避免泄露给您造成不必要的麻烦").textColor(HEX_RGB(0x222222)).font(XKRegularFont(16));
+            confer.text(@"为了您和大家的安全，临时码1小时内，只可进出小区各一次，之后将自动作废。请妥善管理，避免泄露给您造成不必要的麻烦。").textColor(HEX_RGB(0x222222)).font(XKRegularFont(16));
         }];
     }
     return _headerLabel;
@@ -214,7 +221,7 @@
         _contentTitleLabel = [UILabel new];
         _contentTitleLabel.textColor = HEX_RGB(0x222222);
         _contentTitleLabel.textAlignment = NSTextAlignmentCenter;
-        _contentTitleLabel.text = [NSString stringWithFormat:@"%@",[LoginModel currentUser].currentHouseName];
+        _contentTitleLabel.text = [NSString stringWithFormat:@"%@ %@",[LoginModel currentUser].currentHouseName,[LoginModel currentUser].currentInestateslocation];
         _contentTitleLabel.backgroundColor = [UIColor clearColor];
         _contentTitleLabel.font = XKRegularFont(16);
     }

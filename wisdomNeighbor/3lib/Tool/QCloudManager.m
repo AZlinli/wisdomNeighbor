@@ -53,8 +53,11 @@ static QCloudManager *_manager = nil;
         NSLog(@"%@",result.location);
         ws.upload = nil;
         dispatch_async(dispatch_get_main_queue(), ^{
-            success(result.location);
-            failure(error.description);
+            if (error) {
+                failure(error.description);
+            }else{
+                success(result.location);
+            }
         });
     }];
     [self.upload setSendProcessBlock:^(int64_t bytesSent, int64_t totalBytesSent, int64_t totalBytesExpectedToSend) {
@@ -121,8 +124,11 @@ static QCloudManager *_manager = nil;
         NSLog(@"%@",result.location);
         ws.upload = nil;
         dispatch_async(dispatch_get_main_queue(), ^{
-            success(result.location);
-            failure(error.description);
+            if (error) {
+                failure(error.description);
+            }else{
+                success(result.location);
+            }
         });
     }];
     [[QCloudCOSTransferMangerService defaultCOSTransferManager] UploadObject:self.upload];
