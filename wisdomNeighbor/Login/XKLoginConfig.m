@@ -23,6 +23,7 @@
  */
 + (void)loginDropOutConfig {
     [LoginModel cleanUser];
+    
 
 }
 
