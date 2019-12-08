@@ -134,7 +134,7 @@
 - (void)loadDetail:(LoginHousingModelData * )model {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"type"] = @"visitorSelectEstates";
-    parameters[@"userId"] = @"20";
+    parameters[@"userId"] = [LoginModel currentUser].data.users.userId;
     parameters[@"estateId"] = model.ID;
 
     [HTTPClient postRequestWithURLString:@"project_war_exploded/estatesServlet" timeoutInterval:20 parameters:parameters success:^(id responseObject) {

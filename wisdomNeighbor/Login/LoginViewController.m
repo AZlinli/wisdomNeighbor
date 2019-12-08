@@ -525,6 +525,9 @@
     }
     [HTTPClient postRequestWithURLString:@"project_war_exploded/userServlet" timeoutInterval:20 parameters:parameters success:^(id responseObject) {
         [XKHudView showSuccessMessage:@"登录成功！"];
+        LoginModel *model = [LoginModel yy_modelWithJSON:responseObject];
+        [self dealRegisterModel:model];
+        [XKLoginConfig loginConfig];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             LoginVisitorPlotViewController *vc = [LoginVisitorPlotViewController new];
                UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
