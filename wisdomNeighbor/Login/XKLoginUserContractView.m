@@ -10,10 +10,6 @@
 @interface XKLoginUserContractView()
 /**合同名字*/
 @property(nonatomic, copy) NSString *contractTitle;
-/**固定的合同前缀*/
-@property(nonatomic, copy) NSString *contractFixationTitle;
-/**选择按钮*/
-@property(nonatomic, strong) UIButton *selectButton;
 /**合同label*/
 @property(nonatomic, strong) YYLabel *contractLabel;
 /**容器*/
@@ -22,10 +18,10 @@
 
 @implementation XKLoginUserContractView
 
-- (instancetype)initWithContractTitle:(NSString *)contractTitle {
+- (instancetype)initWithContractTitle:(NSString *)contractTitle contractFixationTitle:(NSString *)contractFixationTitle{
     if (self = [super init]) {
         _contractTitle = contractTitle;
-        _contractFixationTitle = @"我已阅读并同意";
+        _contractFixationTitle = contractFixationTitle;
         [self creatUI];
     }
     return self;

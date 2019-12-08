@@ -174,6 +174,10 @@
 		3B5B80CD233A11E200489E67 /* XKVideoDisplayTransiton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B5B80CC233A11E200489E67 /* XKVideoDisplayTransiton.m */; };
 		3B5B80D0233A125500489E67 /* XKPercentDrivenInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B5B80CE233A125500489E67 /* XKPercentDrivenInteractiveTransition.m */; };
 		3B5B80D3233A131300489E67 /* XKVideoDisplayMediator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B5B80D2233A131300489E67 /* XKVideoDisplayMediator.m */; };
+		3B6AD60F2399478800341991 /* RegistPlotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B6AD60E2399478700341991 /* RegistPlotViewController.m */; };
+		3B6AD612239957BF00341991 /* RegistPlotTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B6AD611239957BF00341991 /* RegistPlotTableViewCell.m */; };
+		3B6B8144239B63910005D42B /* SelectPlotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B6B8143239B63910005D42B /* SelectPlotViewController.m */; };
+		3B6B8147239B7E4A0005D42B /* LoginVisitorPlotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B6B8146239B7E4A0005D42B /* LoginVisitorPlotViewController.m */; };
 		3B70A48023419576001FF8E7 /* FriendCircleDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B70A47F23419576001FF8E7 /* FriendCircleDetailViewController.m */; };
 		3B70A4912341A936001FF8E7 /* SDCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B70A4852341A936001FF8E7 /* SDCycleScrollView.m */; };
 		3B70A4922341A936001FF8E7 /* UIView+SDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B70A4862341A936001FF8E7 /* UIView+SDExtension.m */; };
@@ -607,6 +611,14 @@
 		3B5B80D1233A131300489E67 /* XKVideoDisplayMediator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XKVideoDisplayMediator.h; sourceTree = "<group>"; };
 		3B5B80D2233A131300489E67 /* XKVideoDisplayMediator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XKVideoDisplayMediator.m; sourceTree = "<group>"; };
 		3B66BED68048E5CBAF60250D /* Pods_wisdomNeighborUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_wisdomNeighborUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B6AD60D2399478700341991 /* RegistPlotViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegistPlotViewController.h; sourceTree = "<group>"; };
+		3B6AD60E2399478700341991 /* RegistPlotViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegistPlotViewController.m; sourceTree = "<group>"; };
+		3B6AD610239957BF00341991 /* RegistPlotTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegistPlotTableViewCell.h; sourceTree = "<group>"; };
+		3B6AD611239957BF00341991 /* RegistPlotTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegistPlotTableViewCell.m; sourceTree = "<group>"; };
+		3B6B8142239B63910005D42B /* SelectPlotViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectPlotViewController.h; sourceTree = "<group>"; };
+		3B6B8143239B63910005D42B /* SelectPlotViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectPlotViewController.m; sourceTree = "<group>"; };
+		3B6B8145239B7E4A0005D42B /* LoginVisitorPlotViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginVisitorPlotViewController.h; sourceTree = "<group>"; };
+		3B6B8146239B7E4A0005D42B /* LoginVisitorPlotViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginVisitorPlotViewController.m; sourceTree = "<group>"; };
 		3B70A47E23419576001FF8E7 /* FriendCircleDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FriendCircleDetailViewController.h; sourceTree = "<group>"; };
 		3B70A47F23419576001FF8E7 /* FriendCircleDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FriendCircleDetailViewController.m; sourceTree = "<group>"; };
 		3B70A4822341A936001FF8E7 /* UIView+SDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SDExtension.h"; sourceTree = "<group>"; };
@@ -937,6 +949,12 @@
 				3BE1A3F92382E2D9002387A4 /* VerificationNextViewController.h */,
 				3BE1A3FA2382E2D9002387A4 /* VerificationNextViewController.m */,
 				3BE1A3FB2382E2D9002387A4 /* VerificationNextViewController.xib */,
+				3B6AD60D2399478700341991 /* RegistPlotViewController.h */,
+				3B6AD60E2399478700341991 /* RegistPlotViewController.m */,
+				3B6B8142239B63910005D42B /* SelectPlotViewController.h */,
+				3B6B8143239B63910005D42B /* SelectPlotViewController.m */,
+				3B6B8145239B7E4A0005D42B /* LoginVisitorPlotViewController.h */,
+				3B6B8146239B7E4A0005D42B /* LoginVisitorPlotViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1362,6 +1380,8 @@
 				3B311DDF23812FF800D0602E /* LoginHousingTableViewCell.h */,
 				3B311DE023812FF800D0602E /* LoginHousingTableViewCell.m */,
 				3B311DE123812FF800D0602E /* LoginHousingTableViewCell.xib */,
+				3B6AD610239957BF00341991 /* RegistPlotTableViewCell.h */,
+				3B6AD611239957BF00341991 /* RegistPlotTableViewCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -2299,6 +2319,7 @@
 				3BB862E92334B61A00564C88 /* NSObject+XKController.m in Sources */,
 				3BB8637F23364E8900564C88 /* PersonalDataPicTableViewCell.m in Sources */,
 				3B493A9A234EDC8800D7923C /* XKLoginConfig.m in Sources */,
+				3B6AD612239957BF00341991 /* RegistPlotTableViewCell.m in Sources */,
 				3B70A4B423420036001FF8E7 /* FriendListTableViewCell.m in Sources */,
 				3BB862E52334B54100564C88 /* UIView+Border.m in Sources */,
 				3B40891123293EE100002108 /* UIImage+Common.m in Sources */,
@@ -2368,6 +2389,7 @@
 				3B84F8F6232A67BE0070EA1D /* NSObject+XKGlobeMethod.m in Sources */,
 				3B84F8F3232A5C430070EA1D /* UIView+ShadowPath.m in Sources */,
 				3BB8633523350E4300564C88 /* NSAttributedString+MLLabel.m in Sources */,
+				3B6B8144239B63910005D42B /* SelectPlotViewController.m in Sources */,
 				3B4088E423293B0200002108 /* XKUserInfo.m in Sources */,
 				3BB8633B23350E4300564C88 /* MLLabel.m in Sources */,
 				3BB8633E23350E4300564C88 /* UILabel+xkEmoji.m in Sources */,
@@ -2381,6 +2403,8 @@
 				3B40892E23293FB500002108 /* XKAlertUtil.m in Sources */,
 				3B40890D23293EE100002108 /* UIFont+XKFont.m in Sources */,
 				3BE980DA232D42B20065100F /* LoginViewController.m in Sources */,
+				3B6B8147239B7E4A0005D42B /* LoginVisitorPlotViewController.m in Sources */,
+				3B6AD60F2399478800341991 /* RegistPlotViewController.m in Sources */,
 				3B4089AB23294C8A00002108 /* BaseViewFactory.m in Sources */,
 				3B311DE223812FF800D0602E /* LoginHousingTableViewCell.m in Sources */,
 				3B40893023293FB500002108 /* XKCommonAlertView.m in Sources */,

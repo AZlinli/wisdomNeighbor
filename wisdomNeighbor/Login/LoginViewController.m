@@ -14,6 +14,8 @@
 #import "XKLoginUserContractView.h"
 #import "XKJumpWebViewController.h"
 #import "VerificationViewController.h"
+#import "RegistPlotViewController.h"
+#import "LoginVisitorPlotViewController.h"
 
 @interface LoginViewController ()<UITextFieldDelegate>
 /**contentView*/
@@ -61,6 +63,11 @@
 @property(nonatomic, strong) UIButton *otherLonginButton;
 /**协议界面*/
 @property(nonatomic, strong) XKLoginUserContractView *contractView;
+/**协议界面2*/
+@property(nonatomic, strong) XKLoginUserContractView *contractView2;
+
+/**注册按钮*/
+@property(nonatomic, strong) UIButton *registerButton;
 
 @end
 
@@ -88,6 +95,11 @@
     [self loadMseCodeData];
 }
 
+- (void )registerButtonAction:(UIButton *)sender {
+    RegistPlotViewController *vc = [RegistPlotViewController new];
+    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
+    [self presentViewController:nav animated:YES completion:nil];
+}
 - (void)loginButtonAction:(UIButton *)sender {
     if (self.vcType == loginVCTyoeLogin) {
         [self loginNetwork:YES];
@@ -125,11 +137,11 @@
             [XKHudView showSuccessMessage:@"发送成功"];
         } failure:^(XKHttpErrror *error) {
             [XKHudView hideHUDForView:self.view  animated:YES];
-            [XKAlertView showCommonAlertViewWithTitle:error.message rightText:@"立即验证" rightBlock:^{
-                VerificationViewController *vc = [[VerificationViewController alloc]initWithNibName:@"VerificationViewController" bundle:nil];
-                UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
-                [self presentViewController:nav animated:YES completion:nil];;
-            }];
+//            [XKAlertView showCommonAlertViewWithTitle:error.message rightText:@"立即验证" rightBlock:^{
+//                VerificationViewController *vc = [[VerificationViewController alloc]initWithNibName:@"VerificationViewController" bundle:nil];
+//                UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
+//                [self presentViewController:nav animated:YES completion:nil];;
+//            }];
         }];
     }else{
         [XKHudView showErrorMessage:@"请输入正确的手机号"];
@@ -137,6 +149,10 @@
 }
    
 - (void)loginNetwork:(BOOL)isNomal {
+    if (self.contractView2.selectButton.selected) {
+        [self loginVisitor];
+        return;
+    }
     NSString *phone;
     if (isNomal) {
         phone = self.phoneTextField.text;
@@ -234,9 +250,11 @@
     [self.contentView addSubview:self.line3];
     [self.contentView addSubview:self.line4];
     [self.contentView addSubview:self.longinButton];
+    [self.contentView addSubview:self.registerButton];
     [self.contentView addSubview:self.otherLonginButton];
     [self.contentView addSubview:self.desLabel];
     [self.contentView addSubview:self.contractView];
+    [self.contentView addSubview:self.contractView2];
 
     [self layout];
 }
@@ -357,11 +375,25 @@
         make.height.mas_equalTo(1);
     }];
     
-    [self.longinButton mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.registerButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(15);
+        make.top.equalTo(self.line3.mas_bottom).offset(30);
+        make.width.mas_equalTo(SCREEN_WIDTH/2 - 15 - 5);
+        make.height.mas_equalTo(44);
+    }];
+    
+    [self.longinButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.registerButton.mas_right).offset(10);
         make.top.equalTo(self.line3.mas_bottom).offset(30);
         make.right.mas_equalTo(-15);
         make.height.mas_equalTo(44);
+    }];
+    
+    [self.contractView2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.longinButton.mas_bottom).offset(20);
+        make.left.mas_equalTo(self.registerButton.mas_left).offset(5);
+        make.width.mas_equalTo(100);
+        make.height.mas_equalTo(20);
     }];
     
     [self.contractView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -455,12 +487,52 @@
 - (XKLoginUserContractView *)contractView {
     if (!_contractView) {
         XKWeakSelf(ws);
-        _contractView = [[XKLoginUserContractView alloc]initWithContractTitle:@"智邻用户协议"];
+        _contractView = [[XKLoginUserContractView alloc]initWithContractTitle:@"智邻用户协议" contractFixationTitle:@"我已阅读并同意"];
         _contractView.contractBlock = ^{
             [ws contractAction];
         };
     }
     return _contractView;
+}
+
+- (XKLoginUserContractView *)contractView2 {
+    if (!_contractView2) {
+        _contractView2 = [[XKLoginUserContractView alloc]initWithContractTitle:@"" contractFixationTitle:@"游客登录模式"];
+        _contractView2.selectButton.selected = NO;
+    }
+    return _contractView2;
+}
+//游客登录
+- (void)loginVisitor {
+    NSString *phone;
+    if (!self.contractView.isAgreeContract) {
+        [XKHudView showErrorMessage:@"请先同意用户协议！"];
+        return;
+    }
+    
+    if (self.codeTextField.text.length == 0) {
+        [XKHudView showErrorMessage:@"验证码不能为空"];
+        return;
+    }
+    phone = self.phoneTextField.text;
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"type"] = @"loginVisitor";
+    parameters[@"phone"] = phone;
+    parameters[@"smsCode"] = self.codeTextField.text;
+    if (![self checkMobile:phone]) {
+        [XKHudView showErrorMessage:@"请输入正确的手机号"];
+        return;
+    }
+    [HTTPClient postRequestWithURLString:@"project_war_exploded/userServlet" timeoutInterval:20 parameters:parameters success:^(id responseObject) {
+        [XKHudView showSuccessMessage:@"登录成功！"];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            LoginVisitorPlotViewController *vc = [LoginVisitorPlotViewController new];
+               UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
+               [self presentViewController:nav animated:YES completion:nil];
+        });
+    } failure:^(XKHttpErrror *error) {
+        [XKHudView showErrorMessage:error.message];
+    }];
 }
 
 - (void)contractAction {
@@ -632,7 +704,23 @@
     }
     return _sendCodeBuutton;
 }
+- (UIButton *)registerButton {
+    if (!_registerButton) {
+        _registerButton = [[UIButton alloc]init];
+        [_registerButton setTitle:@"注册小区" forState:0];
+        [_registerButton setTitleColor:XKMainTypeColor forState:0];
+        [_registerButton setBackgroundColor:HEX_RGB(0xffffff)];
+        _registerButton.layer.masksToBounds = YES;
+        _registerButton.layer.cornerRadius = 8;
+        _registerButton.layer.borderWidth = 1;
+        _registerButton.layer.borderColor = XKMainTypeColor.CGColor;
+        [_registerButton addTarget:self action:@selector(registerButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+        _registerButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+        [_registerButton.titleLabel setFont:XKRegularFont(16)];
 
+    }
+    return _registerButton;
+}
 - (UIButton *)longinButton {
     if (!_longinButton) {
         _longinButton = [[UIButton alloc]init];

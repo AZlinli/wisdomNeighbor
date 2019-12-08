@@ -8,8 +8,7 @@
 
 #import "LoginHousingTableViewCell.h"
 @interface LoginHousingTableViewCell()
-@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *desLabel;
+
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *nextImageView;
 
 @end
@@ -36,6 +35,12 @@
     _modelData = modelData;
     self.desLabel.text = modelData.name;
     self.nameLabel.text = modelData.locationstring;
+    self.backgroundColor = UIColorFromRGB(0xffffff);
+}
+- (void)setHousingModelData:(LoginHousingModelData *)housingModelData {
+    _housingModelData = housingModelData;
+    self.desLabel.text = housingModelData.name;
+    self.nameLabel.text = housingModelData.locationstring;
     self.backgroundColor = UIColorFromRGB(0xffffff);
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
