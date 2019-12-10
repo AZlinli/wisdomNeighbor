@@ -17,6 +17,7 @@
 #import "BlackListViewController.h"
 #import "LoginViewController.h"
 #import "AboutAppViewController.h"
+#import "LoginVisitorPlotViewController.h"
 
 @interface MineRootViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView    *tableView;
@@ -72,13 +73,16 @@
 - (NSArray *)dataArray {
     
     if (!_dataArray) {
-        if ([[LoginModel currentUser].currentUserType isEqualToString:@"1"] || [[LoginModel currentUser].currentUserType isEqualToString:@"2"]) {
-             _dataArray = @[@[@"个人信息",@"私聊消息",@"住户管理",@"已屏蔽用户"], @[@"切换房子",@"检查更新",@"关于智邻"]];
+        if ([LoginModel currentUser].loginVisitor) {
+             _dataArray = @[@[@"个人信息"], @[@"检查更新",@"切换房子",@"关于智邻"]];
         }else{
-             _dataArray = @[@[@"个人信息",@"私聊消息",@"已屏蔽用户"], @[@"切换房子",@"检查更新",@"关于智邻"]];
+        if ([[LoginModel currentUser].currentUserType isEqualToString:@"1"] || [[LoginModel currentUser].currentUserType isEqualToString:@"2"]) {
+                    _dataArray = @[@[@"个人信息",@"私聊消息",@"住户管理",@"已屏蔽用户"], @[@"切换房子",@"检查更新",@"关于智邻"]];
+               }else{
+                    _dataArray = @[@[@"个人信息",@"私聊消息",@"已屏蔽用户"], @[@"切换房子",@"检查更新",@"关于智邻"]];
+               }
         }
-       
-    }
+}
     return _dataArray;
 }
 
@@ -168,9 +172,15 @@
         MineResidentManagementViewController *vc = [MineResidentManagementViewController new];
         [self.navigationController pushViewController:vc animated:YES];
     }else if ([title isEqualToString:@"切换房子"]){
-        LoginHousingViewController *vc = [LoginHousingViewController new];
-        vc.showBack = YES;
-        [self.navigationController pushViewController:vc animated:YES];
+        if ([LoginModel currentUser].loginVisitor) {
+            LoginVisitorPlotViewController *vc = [LoginVisitorPlotViewController new];
+            [self.navigationController pushViewController:vc animated:YES];
+        }else{
+            LoginHousingViewController *vc = [LoginHousingViewController new];
+            vc.showBack = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+
     }else if ([title isEqualToString:@"设置中心"]){
         MineSettingViewController *vc = [MineSettingViewController new];
         [self.navigationController pushViewController:vc animated:YES];

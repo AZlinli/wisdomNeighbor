@@ -108,12 +108,15 @@ static NSString *const replyCellId = @"replyCellId";
                     if (model2) {
                         currentLastId = model2.ID;
                     }
-                    
-                    if (currentLastId < self.lastId) {
-                        self.refreshStatus = Refresh_HasDataAndHasMoreData;
-                    } else {
+                    if ([LoginModel currentUser].loginVisitor) {
                         self.refreshStatus = Refresh_NoDataOrHasNoMoreData;
+                    }else{
+                        if (currentLastId < self.lastId) {
+                            self.refreshStatus = Refresh_HasDataAndHasMoreData;
+                        } else {
+                            self.refreshStatus = Refresh_NoDataOrHasNoMoreData;
 
+                        }
                     }
                     [self.dataArray addObjectsFromArray:array];
                     EXECUTE_BLOCK(complete,nil,array);

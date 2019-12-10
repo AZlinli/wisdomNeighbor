@@ -105,7 +105,11 @@
     }];
     _tableView.mj_footer.hidden = YES;
     _tableView.mj_footer = mj_footer;
-    [mj_footer setTitle:@"已经到底了！" forState:MJRefreshStateNoMoreData];
+    if ([LoginModel currentUser].loginVisitor) {
+        [mj_footer setTitle:@"游客只能看见十天已发布的动态！" forState:MJRefreshStateNoMoreData];
+    }else{
+        [mj_footer setTitle:@"已经到底了！" forState:MJRefreshStateNoMoreData];
+    }
     [self.viewModel registerCellForTableView:self.tableView];
     [self.viewModel configVCToolBar:self];
     

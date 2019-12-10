@@ -187,6 +187,7 @@
         LoginModel *model = [LoginModel yy_modelWithJSON:responseObject];
         [self dealRegisterModel:model];
         [XKLoginConfig loginConfig];
+        [LoginModel currentUser].loginVisitor = NO;
         LoginHousingViewController *vc = [LoginHousingViewController new];
         vc.showBack = NO;
         UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
@@ -528,6 +529,7 @@
         LoginModel *model = [LoginModel yy_modelWithJSON:responseObject];
         [self dealRegisterModel:model];
         [XKLoginConfig loginConfig];
+        [LoginModel currentUser].loginVisitor = YES;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             LoginVisitorPlotViewController *vc = [LoginVisitorPlotViewController new];
                UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];

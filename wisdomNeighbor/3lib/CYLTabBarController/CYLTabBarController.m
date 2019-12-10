@@ -10,6 +10,8 @@
 #import "CYLTabBar.h"
 #import <objc/runtime.h>
 #import "UIViewController+CYLTabBarControllerExtention.h"
+#import "SweepQRCodeRootViewController.h"
+#import "BaseTabBarConfig.h"
 
 NSString *const CYLTabBarItemTitle = @"CYLTabBarItemTitle";
 NSString *const CYLTabBarItemImage = @"CYLTabBarItemImage";
@@ -472,8 +474,18 @@ static BOOL avoidRepeatFlag = YES;
 }
 
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
-    [self updateSelectionStatusIfNeededForTabBarController:tabBarController shouldSelectViewController:viewController];
-    return YES;
+    if ([LoginModel currentUser].loginVisitor) {
+        UINavigationController *nav = (UINavigationController *)viewController;
+        for (BaseViewController *vc in nav.viewControllers) {
+            if ([vc isKindOfClass:[SweepQRCodeRootViewController class]]) {
+                return NO;
+            }
+        }
+        return YES;
+    }else{
+        [self updateSelectionStatusIfNeededForTabBarController:tabBarController shouldSelectViewController:viewController];
+        return YES;
+    }
 }
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectControl:(UIControl *)control {
@@ -497,7 +509,7 @@ static BOOL avoidRepeatFlag = YES;
 }
 
 - (void)oglFlipAnimation:(UIView *)view {
-#ifdef DEBUG
+//#ifdef DEBUG
 //    CATransition *anima = [CATransition animation];
 //    anima.type = @"oglFlip";//设置动画的类型
 //    anima.subtype = kCATransitionFromRight; //设置动画的方向
@@ -513,8 +525,8 @@ static BOOL avoidRepeatFlag = YES;
     spring.fromValue = [NSNumber numberWithFloat:0.7];
     spring.toValue = [NSNumber numberWithFloat:1.0];
     [view.layer addAnimation:spring forKey:@"oglFlipAnimation"];
-#else
-#endif
+//#else
+//#endif
 }
 
 - (id)rootViewController {

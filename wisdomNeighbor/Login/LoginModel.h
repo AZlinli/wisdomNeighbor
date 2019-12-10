@@ -77,7 +77,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy) NSString *currentHouseName;
 @property(nonatomic, copy) NSString *currentUserType;
 @property (nonatomic , copy) NSString              * currentInestateslocation;
-
+/**是否是游客登录*/
+@property(nonatomic, assign) BOOL loginVisitor;
 
 /**取得当前用户*/
 + (LoginModel *)currentUser;
