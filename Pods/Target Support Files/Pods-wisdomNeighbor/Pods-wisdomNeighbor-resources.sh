@@ -97,7 +97,6 @@ EOM
   esac
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_resource "${PODS_ROOT}/BaiduMapKit/BaiduMapKit/BaiduMapAPI_Map.framework/mapapi.bundle"
   install_resource "${PODS_ROOT}/RongCloudIM/RongCloudIM/RongCloud.bundle"
   install_resource "${PODS_ROOT}/RongCloudIM/RongCloudIM/en.lproj"
   install_resource "${PODS_ROOT}/RongCloudIM/RongCloudIM/zh-Hans.lproj"
@@ -105,7 +104,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "${PODS_ROOT}/RongCloudIM/RongCloudIM/RCConfig.plist"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_resource "${PODS_ROOT}/BaiduMapKit/BaiduMapKit/BaiduMapAPI_Map.framework/mapapi.bundle"
   install_resource "${PODS_ROOT}/RongCloudIM/RongCloudIM/RongCloud.bundle"
   install_resource "${PODS_ROOT}/RongCloudIM/RongCloudIM/en.lproj"
   install_resource "${PODS_ROOT}/RongCloudIM/RongCloudIM/zh-Hans.lproj"
@@ -124,7 +122,7 @@ rm -f "$RESOURCES_TO_COPY"
 if [[ -n "${WRAPPER_EXTENSION}" ]] && [ "`xcrun --find actool`" ] && [ -n "${XCASSET_FILES:-}" ]
 then
   # Find all other xcassets (this unfortunately includes those of path pods and other targets).
-  OTHER_XCASSETS=$(find "$PWD" -iname "*.xcassets" -type d)
+  OTHER_XCASSETS=$(find -L "$PWD" -iname "*.xcassets" -type d)
   while read line; do
     if [[ $line != "${PODS_ROOT}*" ]]; then
       XCASSET_FILES+=("$line")

@@ -290,6 +290,7 @@
 		3BE980D4232D37BE0065100F /* MineResidentRedactTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE980D3232D37BE0065100F /* MineResidentRedactTableViewCell.m */; };
 		3BE980D7232D3EFB0065100F /* MineSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE980D6232D3EFB0065100F /* MineSettingViewController.m */; };
 		3BE980DA232D42B20065100F /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE980D9232D42B20065100F /* LoginViewController.m */; };
+		47B953502EFABACB49B43994 /* Pods_wisdomNeighbor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CCC2C660D11DE0EB2CB6E1B /* Pods_wisdomNeighbor.framework */; };
 		8DC5AA12EDE2D62243C0F441 /* Pods_wisdomNeighborUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B66BED68048E5CBAF60250D /* Pods_wisdomNeighborUITests.framework */; };
 		932AF54ED9EF6A4D559C7688 /* Pods_wisdomNeighborTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72D361F0141A45E1B1DB4EE5 /* Pods_wisdomNeighborTests.framework */; };
 /* End PBXBuildFile section */
@@ -859,6 +860,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47B953502EFABACB49B43994 /* Pods_wisdomNeighbor.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2711,7 +2713,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = RYF558N5RP;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = $SRCROOT/wisdomNeighbor/Base/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = "$SRCROOT/wisdomNeighbor/Base/PrefixHeader.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/wisdomNeighbor/resource/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2735,7 +2737,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = RYF558N5RP;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = $SRCROOT/wisdomNeighbor/Base/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = "$SRCROOT/wisdomNeighbor/Base/PrefixHeader.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/wisdomNeighbor/resource/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = (
